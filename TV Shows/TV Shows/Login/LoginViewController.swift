@@ -7,44 +7,50 @@
 
 import UIKit
 
-public class LoginViewController : UIViewController {
+final class LoginViewController : UIViewController {
     
-    // parent
+    // MARK: - Lifecycle methods
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Change background color and add starting text to label
-        labelOutlet.text = "\(labelText)\(numberOfTaps)"
-        self.view.backgroundColor = UIColor.lightGray
-        
-        // Loading indicator startup
-        activityIndicator.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.activityIndicator.stopAnimating()
-        }
+        setupUI()
+        animateSpinner()
     }
     
-    // variables
-    var labelText = "Number of taps:\n"
-    var numberOfTaps : Int = 0;
+    // MARK: - Properties
     
-    // outlets
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var labelOutlet: UILabel!
+    private var labelText = "Number of taps:\n"
+    private var numberOfTaps : Int = 0
     
-    // actions
-    @IBAction func IncreaseCounterAndUpdateLabel(_ sender: Any) {
-        
-        guard labelOutlet != nil else { return }
-        guard activityIndicator != nil else { return }
-        
-        if(activityIndicator.isAnimating){
-            activityIndicator.stopAnimating()
+    // MARK: - Outlets
+    
+    @IBOutlet private weak var showcaseIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var numberOfTapsLabel: UILabel!
+    
+    // MARK: - IBActions
+    
+    @IBAction private func increaseCounterAndUpdateLabel() {
+        if showcaseIndicator.isAnimating {
+            showcaseIndicator.stopAnimating()
         } else {
-            activityIndicator.startAnimating()
+            showcaseIndicator.startAnimating()
         }
         
         numberOfTaps += 1
-        labelOutlet.text = "\(labelText) \(numberOfTaps)"
+        numberOfTapsLabel.text = "\(labelText) \(numberOfTaps)"
+    }
+    
+    // MARK: - Controller setup methods
+    
+    private func setupUI(){
+        numberOfTapsLabel.text = "\(labelText)\(numberOfTaps)"
+        view.backgroundColor = .lightGray
+    }
+    
+    private func animateSpinner(){
+        showcaseIndicator.startAnimating()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.showcaseIndicator.stopAnimating()
+        }
     }
 }

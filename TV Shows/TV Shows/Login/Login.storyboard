@@ -34,7 +34,7 @@
                                     </backgroundConfiguration>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="IncreaseCounterAndUpdateLabel:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="B3W-2n-JGu"/>
+                                    <action selector="IncreaseCounterAndUpdateLabel" destination="Y6W-OH-hqX" eventType="touchUpInside" id="4hr-JT-kDx"/>
                                 </connections>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Gc4-8t-CeS">
@@ -56,7 +56,7 @@
                     </view>
                     <connections>
                         <outlet property="LabelOutlet" destination="cH9-m9-V0R" id="aaT-T3-3LL"/>
-                        <outlet property="activityIndicator" destination="Gc4-8t-CeS" id="RSN-do-veB"/>
+                        <outlet property="showcaseIndicator" destination="Gc4-8t-CeS" id="RSN-do-veB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
