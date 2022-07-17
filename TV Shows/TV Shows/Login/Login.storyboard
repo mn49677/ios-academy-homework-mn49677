@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController title="Login View Controller" id="Y6W-OH-hqX" customClass="LoginViewController" customModule="TV_Shows" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cH9-m9-V0R">
+                                <rect key="frame" x="40" y="104" width="334" height="37"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9G-BW-Hea">
+                                <rect key="frame" x="169" y="241" width="76" height="38"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="9004798_arrow_direction_right_next_icon" imagePlacement="trailing" title="Tap ">
+                                    <backgroundConfiguration key="background" cornerRadius="16">
+                                        <color key="backgroundColor" name="AccentColor"/>
+                                    </backgroundConfiguration>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="IncreaseCounterAndUpdateLabel" destination="Y6W-OH-hqX" eventType="touchUpInside" id="4hr-JT-kDx"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Gc4-8t-CeS">
+                                <rect key="frame" x="197" y="379" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="cH9-m9-V0R" secondAttribute="trailing" constant="40" id="L9R-RN-w5L"/>
+                            <constraint firstItem="B9G-BW-Hea" firstAttribute="top" secondItem="cH9-m9-V0R" secondAttribute="bottom" constant="100" id="MU6-d2-HCt"/>
+                            <constraint firstItem="B9G-BW-Hea" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="QFd-6L-87E"/>
+                            <constraint firstItem="cH9-m9-V0R" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="60" id="ah2-hl-mCd"/>
+                            <constraint firstItem="cH9-m9-V0R" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="lXu-VE-o7u"/>
+                            <constraint firstItem="Gc4-8t-CeS" firstAttribute="top" secondItem="B9G-BW-Hea" secondAttribute="bottom" constant="100" id="nRi-NV-dvT"/>
+                            <constraint firstItem="B9G-BW-Hea" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="uAU-Wp-Gdf"/>
+                            <constraint firstItem="Gc4-8t-CeS" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="wZO-VC-he5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="LabelOutlet" destination="cH9-m9-V0R" id="aaT-T3-3LL"/>
+                        <outlet property="showcaseIndicator" destination="Gc4-8t-CeS" id="RSN-do-veB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6" y="102"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="9004798_arrow_direction_right_next_icon" width="24" height="24"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
