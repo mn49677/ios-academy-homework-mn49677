@@ -23,24 +23,24 @@ final class LoginViewController : UIViewController {
 
     // MARK: - Actions
     
-    @IBAction func loginButtonTapped(_ sender: Any) {
-        let email = emailTextField.text!
-        let password = passwordTextField.text!
+    @IBAction func loginButtonTapped() {
+        let email = emailTextField.text
+        let password = passwordTextField.text
+        
+        guard let email = email, let password = password else { return }
         loginUserWith(email: email, password: password)
     }
     
-    @IBAction func registerButtonTapped(_ sender: Any) {
-        let email = emailTextField.text!
-        let password = passwordTextField.text!
+    @IBAction func registerButtonTapped() {
+        let email = emailTextField.text
+        let password = passwordTextField.text
+        
+        guard let email = email, let password = password else { return }
         registerUserWith(email: email, password: password)
     }
     
     @IBAction func rememberMeButtonTapped(_ sender: UIButton) {
-        if(sender.isSelected){
-            sender.isSelected = false
-        } else {
-            sender.isSelected = true
-        }
+        sender.isSelected.toggle()
     }
     
     @IBAction func setPasswordVisibilityButton(sender: UIButton) {
@@ -76,7 +76,6 @@ final class LoginViewController : UIViewController {
         passwordTextField.delegate = self
     }
 }
-
 
 private extension LoginViewController {
     
@@ -168,7 +167,7 @@ private extension LoginViewController {
     func pushHomeViewController() {
         let homeController = self.storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.home)
         if let homeController = homeController {
-            self.navigationController?.pushViewController(homeController, animated: true)
+            navigationController?.pushViewController(homeController, animated: true)
         }
     }
 }
