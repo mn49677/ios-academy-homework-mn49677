@@ -117,11 +117,11 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6Db-25-XN0" secondAttribute="trailing" id="SYO-2M-9Tk"/>
                             <constraint firstItem="1PU-D1-cAv" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="W5D-mG-6Md"/>
                             <constraint firstItem="vlr-jn-977" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="YXf-bw-hdX"/>
-                            <constraint firstItem="vlr-jn-977" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="YhT-wT-U3s"/>
+                            <constraint firstItem="vlr-jn-977" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="YhT-wT-U3s"/>
                             <constraint firstItem="D0i-Ft-SO3" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="dmh-fP-gt7"/>
                             <constraint firstItem="1PU-D1-cAv" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="120" id="gfF-GY-CCy"/>
                             <constraint firstItem="D0i-Ft-SO3" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="80" id="j4m-g0-LvH"/>
-                            <constraint firstItem="6Db-25-XN0" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="jc1-9y-PLI"/>
+                            <constraint firstItem="6Db-25-XN0" firstAttribute="trailing" secondItem="5EZ-qb-Rvc" secondAttribute="trailing" id="jc1-9y-PLI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NCh-FY-gzS"/>
