@@ -45,11 +45,37 @@ final class LoginViewController : UIViewController {
         }
     }
     
+    @IBAction func setPasswordVisibilityButton(sender: UIButton) {
+        passwordTextField.isSecureTextEntry.toggle()
+    }
+    
     // MARK: - Lifecycle methods
     
     override public func viewDidLoad() {
-        print("Entered login screen")
         super.viewDidLoad()
+        setupUI()
+    }
+    
+    // MARK: - Methods
+    
+    private func setupUI() {
+        // email placeholder white color
+        emailTextField.attributedPlaceholder = NSAttributedString(
+            string: "Email",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
+        )
+        
+        // password placeholder white color, secure entry
+        passwordTextField.attributedPlaceholder = NSAttributedString(
+            string: "Password",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
+        )
+        passwordTextField.isSecureTextEntry.toggle()
+        let visibilityButton = UIButton(type: .custom)
+        visibilityButton.setImage(UIImage(named: Constants.Assets.visibilityIcon), for: .normal)
+        visibilityButton.addTarget(self, action: #selector(setPasswordVisibilityButton(sender: )), for: .touchUpInside)
+        passwordTextField.rightView = visibilityButton
+        
         
     }
 }

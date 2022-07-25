@@ -17,4 +17,8 @@ enum Constants {
         static var login = "Login"
         static var splash = "SplashScreen"
     }
+    
+    enum Assets {
+        static var visibilityIcon = "visibility-icon"
+    }
 }
