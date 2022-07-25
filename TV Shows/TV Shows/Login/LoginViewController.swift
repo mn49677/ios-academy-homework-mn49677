@@ -150,10 +150,10 @@ private extension LoginViewController {
     // MARK: - Handle successfull login or registration
     
     func responseToSuccess(userResponse: UserResponse){
-        self.user = userResponse.user
+        user = userResponse.user
         print("User email: \(String(describing: self.user?.email))")
         print("User id: \(String(describing: self.user?.id))")
-        self.pushHomeViewController()
+        pushHomeViewController()
     }
     
     // MARK: - Handle failed login or registration
