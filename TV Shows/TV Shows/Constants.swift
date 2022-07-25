@@ -9,12 +9,12 @@ import Foundation
 
 enum Constants {
     enum ViewControllers {
-        static var LoginViewController = "LoginViewController"
-        static var HomeViewController = "HomeViewController"
+        static var login = "LoginViewController"
+        static var home = "HomeViewController"
     }
     
     enum Storyboards {
-        static var LoginStoryboard = "Login"
-        static var SplashStoryboard = "SplashScreen"
+        static var login = "Login"
+        static var splash = "SplashScreen"
     }
 }
