@@ -15,7 +15,7 @@ final class LoginViewController : UIViewController {
     
     private var user: User?
     private var headers: HTTPHeaders?
-    
+
     // MARK: - Outlets
     
     @IBOutlet weak var passwordTextField: UITextField!
@@ -23,21 +23,19 @@ final class LoginViewController : UIViewController {
 
     // MARK: - Actions
     
-    @IBAction func LoginButton(_ sender: Any) {
-        if !emailTextField.hasText || !passwordTextField.hasText { return }
+    @IBAction func loginButtonTapped(_ sender: Any) {
         let email = emailTextField.text!
         let password = passwordTextField.text!
         loginUserWith(email: email, password: password)
     }
     
-    @IBAction func RegisterButton(_ sender: Any) {
-        if !emailTextField.hasText || !passwordTextField.hasText { return }
+    @IBAction func registerButtonTapped(_ sender: Any) {
         let email = emailTextField.text!
         let password = passwordTextField.text!
         registerUserWith(email: email, password: password)
     }
     
-    @IBAction func rememberMeButton(_ sender: UIButton) {
+    @IBAction func rememberMeButtonTapped(_ sender: UIButton) {
         if(sender.isSelected){
             sender.isSelected = false
         } else {
@@ -75,8 +73,7 @@ final class LoginViewController : UIViewController {
         visibilityButton.setImage(UIImage(named: Constants.Assets.visibilityIcon), for: .normal)
         visibilityButton.addTarget(self, action: #selector(setPasswordVisibilityButton(sender: )), for: .touchUpInside)
         passwordTextField.rightView = visibilityButton
-        
-        
+        passwordTextField.delegate = self
     }
 }
 
@@ -169,9 +166,16 @@ private extension LoginViewController {
     // MARK: - Push home view controller
     
     func pushHomeViewController() {
-        let homeController = self.storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.HomeViewController)
+        let homeController = self.storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.home)
         if let homeController = homeController {
             self.navigationController?.pushViewController(homeController, animated: true)
         }
     }
+}
+
+extension LoginViewController : UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return self.emailTextField.hasText && self.passwordTextField.hasText
+    }
+
 }

@@ -90,7 +90,7 @@
                                                 <state key="normal" image="ic-checkbox-unselected"/>
                                                 <state key="selected" image="ic-checkbox-selected"/>
                                                 <connections>
-                                                    <action selector="rememberMeButton:" destination="EIe-Qt-I4w" eventType="touchUpInside" id="O4n-Zw-eeA"/>
+                                                    <action selector="rememberMeButtonTapped:" destination="EIe-Qt-I4w" eventType="touchUpInside" id="HPV-NG-aO7"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="See-8l-o2c">
@@ -115,7 +115,7 @@
                                             <color key="baseForegroundColor" red="0.32156884670000002" green="0.21176743510000001" blue="0.54900860789999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="LoginButton:" destination="EIe-Qt-I4w" eventType="touchUpInside" id="6cA-nB-diM"/>
+                                            <action selector="loginButtonTapped:" destination="EIe-Qt-I4w" eventType="touchUpInside" id="d2k-1E-6M4"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dem-3i-nHY">
@@ -126,7 +126,7 @@
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="RegisterButton:" destination="EIe-Qt-I4w" eventType="touchUpInside" id="GCk-N8-mLS"/>
+                                            <action selector="registerButtonTapped:" destination="EIe-Qt-I4w" eventType="touchUpInside" id="OTY-Mz-huk"/>
                                         </connections>
                                     </button>
                                 </subviews>
