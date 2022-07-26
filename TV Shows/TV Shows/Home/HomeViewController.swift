@@ -51,9 +51,11 @@ private extension HomeViewController {
               MBProgressHUD.hide(for: self.view, animated: true)
               switch dataResponse.result {
               case .success(let showsResponse):
-                  self.shows.append(contentsOf: showsResponse.shows)
-                  print("Success loading shows")
-                  self.showsTableView.reloadData()
+                  if self.currentPage < showsResponse.meta.pagination.pages {
+                      self.shows.append(contentsOf: showsResponse.shows)
+                      print("Success loading shows")
+                      self.showsTableView.reloadData()
+                  }
                   
               case .failure(let error):
                   print(error)
