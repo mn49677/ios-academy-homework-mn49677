@@ -194,6 +194,8 @@ private extension LoginViewController {
 }
 
 extension LoginViewController {
+    
+    // MARK: - Other internal methods
 
     private func updateButtonState() -> Void {
         
