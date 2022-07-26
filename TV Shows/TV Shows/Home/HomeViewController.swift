@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import MBProgressHUD
 
 final class HomeViewController: UIViewController {
     
@@ -18,13 +19,15 @@ final class HomeViewController: UIViewController {
     
     public var userResponse: UserResponse?
     public var authInfo: AuthInfo?
-    private var shows: [Show]?
+    private var shows: [Show] = []
+    private var currentPage: Int = 1
+    private let numberOfCellsPerPage: Int = 20
     
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getShowsResponse()
+        getShowsResponse(page: currentPage, numberOfCells: numberOfCellsPerPage)
         setupTableView()
     }
 }
@@ -33,20 +36,22 @@ private extension HomeViewController {
     
     // MARK: - API communication
     
-    func getShowsResponse(){
+    func getShowsResponse(page: Int, numberOfCells: Int){
         guard let authInfo = authInfo else { return }
+        MBProgressHUD.showAdded(to: view, animated: true)
         AF .request(
               "https://tv-shows.infinum.academy/shows",
               method: .get,
-              parameters: ["page": "1", "items": "100"], // pagination arguments
+              parameters: ["page": String(page), "items": String(numberOfCells)], // pagination arguments
               headers: HTTPHeaders(authInfo.headers)
           )
           .validate()
           .responseDecodable(of: ShowsResponse.self) { [weak self] dataResponse in
               guard let self = self else { return }
+              MBProgressHUD.hide(for: self.view, animated: true)
               switch dataResponse.result {
               case .success(let showsResponse):
-                  self.shows = showsResponse.shows
+                  self.shows.append(contentsOf: showsResponse.shows)
                   print("Success loading shows")
                   self.showsTableView.reloadData()
                   
@@ -60,12 +65,10 @@ private extension HomeViewController {
 extension HomeViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let shows = shows else { return 0}
         return shows.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let shows = shows else { return TvShowTableViewCell() }
         let cell = tableView.dequeueReusableCell(
             withIdentifier: String(describing: TvShowTableViewCell.self),
             for: indexPath
@@ -76,15 +79,20 @@ extension HomeViewController : UITableViewDataSource {
 }
 
 extension HomeViewController: UITableViewDelegate {
-    // Delegate UI events, open up `UITableViewDelegate` and explore :)
 
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let shows = shows else { return }
         tableView.deselectRow(at: indexPath, animated: true)
         let item = shows[indexPath.row]
         print("Selected Item: \(item)")
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row > currentPage * numberOfCellsPerPage - 5 {
+            currentPage += 1
+            getShowsResponse(page: currentPage, numberOfCells: numberOfCellsPerPage)
+        }
     }
 }
 
