@@ -39,4 +39,8 @@ final class UnderlinedTextField: UITextField {
         super.layoutSubviews()
         setupUnderlineLayer()
     }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+    }
 }

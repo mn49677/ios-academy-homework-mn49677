@@ -147,7 +147,7 @@ private extension LoginViewController {
 
 private extension LoginViewController {
     
-    // MARK: - Handle successfull login or registration
+    // MARK: - Handle successful login or registration
     
     func responseToSuccess(userResponse: UserResponse){
         user = userResponse.user
