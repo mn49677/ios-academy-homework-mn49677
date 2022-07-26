@@ -19,6 +19,6 @@ enum Constants {
     }
     
     enum Assets {
-        static var visibilityIcon = "visibility-icon"
+        static var visibilityIcon = "visibility-icon.png"
     }
 }

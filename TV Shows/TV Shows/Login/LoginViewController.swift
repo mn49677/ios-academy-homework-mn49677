@@ -73,7 +73,6 @@ final class LoginViewController : UIViewController {
         visibilityButton.setImage(UIImage(named: Constants.Assets.visibilityIcon), for: .normal)
         visibilityButton.addTarget(self, action: #selector(setPasswordVisibilityButton(sender: )), for: .touchUpInside)
         passwordTextField.rightView = visibilityButton
-        passwordTextField.delegate = self
     }
 }
 
