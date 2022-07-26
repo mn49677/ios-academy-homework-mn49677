@@ -7,7 +7,12 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
+    
+    // MARK: - Properties
+    
+    public var userResponse: UserResponse?
+    public var authInfo: AuthInfo?
     
     // MARK: - Lifecycle methods
     

@@ -13,8 +13,8 @@ final class LoginViewController : UIViewController {
     
     // MARK: - Properties
     
-    private var user: User?
-    private var headers: HTTPHeaders?
+    private var userResponse: UserResponse?
+    private var headers: Dictionary<String, String>?
     private var visibilityButton: UIButton?
 
     // MARK: - Outlets
@@ -116,8 +116,7 @@ private extension LoginViewController {
                 "https://tv-shows.infinum.academy/users",
                 method: .post,
                 parameters: parameters,
-                encoder: JSONParameterEncoder.default,
-                headers: headers
+                encoder: JSONParameterEncoder.default
             )
             .validate()
             .responseDecodable(of: UserResponse.self) { [weak self] dataResponse in
@@ -163,6 +162,9 @@ private extension LoginViewController {
                     self.responseToError(error: error)
                 }
             }
+            .responseJSON { [weak self] response in
+                self?.headers = response.response?.allHeaderFields as? Dictionary<String, String>
+            }
     }
 }
 
@@ -171,9 +173,9 @@ private extension LoginViewController {
     // MARK: - Handle successful login or registration
     
     func responseToSuccess(userResponse: UserResponse){
-        user = userResponse.user
-        print("User email: \(String(describing: self.user?.email))")
-        print("User id: \(String(describing: self.user?.id))")
+        self.userResponse = userResponse
+        print("User email: \(String(describing: userResponse.user.email))")
+        print("User id: \(String(describing: userResponse.user.id))")
         pushHomeViewController()
     }
     
@@ -181,12 +183,20 @@ private extension LoginViewController {
     
     func responseToError(error: AFError){
         print("Error: \(error)")
+        showSimpleAlert()
     }
     
     // MARK: - Push home view controller
     
     func pushHomeViewController() {
-        let homeController = self.storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.home)
+        guard let headers = headers else { return }
+        let homeController = storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.home) as? HomeViewController
+        homeController?.userResponse = userResponse
+        do {
+            try homeController?.authInfo = AuthInfo(headers: headers)
+        } catch {
+            print("Fail")
+        }
         if let homeController = homeController {
             navigationController?.pushViewController(homeController, animated: true)
         }
@@ -209,5 +219,13 @@ extension LoginViewController {
             registerButton.isEnabled = true
             registerButton.alpha = 0.5
         }
+    }
+    
+    func showSimpleAlert() {
+        let alert = UIAlertController(title: "Login/registration failed.", message: "Please try again.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
+                //Cancel Action
+            }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
