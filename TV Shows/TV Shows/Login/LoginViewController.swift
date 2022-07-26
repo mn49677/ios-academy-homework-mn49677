@@ -16,6 +16,7 @@ final class LoginViewController : UIViewController {
     private var userResponse: UserResponse?
     private var headers: Dictionary<String, String>?
     private var visibilityButton: UIButton?
+    private var canGoToHomeController: Int = 0
 
     // MARK: - Outlets
     
@@ -161,10 +162,18 @@ private extension LoginViewController {
                 case .failure(let error):
                     self.responseToError(error: error)
                 }
+                print("user response saved")
             }
             .responseJSON { [weak self] response in
-                self?.headers = response.response?.allHeaderFields as? Dictionary<String, String>
+                guard let headersValue = response.response?.allHeaderFields as? Dictionary<String, String> else { return }
+                self?.headers = headersValue
+                self?.canGoToHomeController += 1
+                if self?.canGoToHomeController == 2 {
+                    self?.pushHomeViewController()
+                }
+                print("Saved headers: \(headersValue)")
             }
+        
     }
 }
 
@@ -176,7 +185,10 @@ private extension LoginViewController {
         self.userResponse = userResponse
         print("User email: \(String(describing: userResponse.user.email))")
         print("User id: \(String(describing: userResponse.user.id))")
-        pushHomeViewController()
+        canGoToHomeController += 1
+        if canGoToHomeController == 2 {
+            pushHomeViewController()
+        }
     }
     
     // MARK: - Handle failed login or registration
@@ -198,7 +210,8 @@ private extension LoginViewController {
             print("Fail")
         }
         if let homeController = homeController {
-            navigationController?.pushViewController(homeController, animated: true)
+            navigationController?.setViewControllers([homeController], animated: true)
+            // navigationController?.pushViewController(homeController, animated: true)
         }
     }
 }

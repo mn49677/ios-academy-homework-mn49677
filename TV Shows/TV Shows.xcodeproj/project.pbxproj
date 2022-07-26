@@ -17,6 +17,9 @@
 		AD538CD22875F49500C7FCDA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD538CD12875F49500C7FCDA /* SceneDelegate.swift */; };
 		AD538CD92875F49C00C7FCDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD538CD82875F49C00C7FCDA /* Assets.xcassets */; };
 		AD538CDC2875F49C00C7FCDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD538CDA2875F49C00C7FCDA /* LaunchScreen.storyboard */; };
+		AD761E81289074DA001811D6 /* ShowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD761E80289074DA001811D6 /* ShowList.swift */; };
+		AD761E8728908DD0001811D6 /* TvShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD761E8528908DD0001811D6 /* TvShowTableViewCell.swift */; };
+		AD761E8828908DD0001811D6 /* TvShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD761E8628908DD0001811D6 /* TvShowTableViewCell.xib */; };
 		AD86D275287C70EF0049FD11 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD86D274287C70EF0049FD11 /* Login.storyboard */; };
 		AD86D277287C710B0049FD11 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD86D276287C710B0049FD11 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +37,9 @@
 		AD538CD82875F49C00C7FCDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD538CDB2875F49C00C7FCDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD538CDD2875F49C00C7FCDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD761E80289074DA001811D6 /* ShowList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowList.swift; sourceTree = "<group>"; };
+		AD761E8528908DD0001811D6 /* TvShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShowTableViewCell.swift; sourceTree = "<group>"; };
+		AD761E8628908DD0001811D6 /* TvShowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TvShowTableViewCell.xib; sourceTree = "<group>"; };
 		AD86D274287C70EF0049FD11 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		AD86D276287C710B0049FD11 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C76CC78DA9CC6E09C1FF49C0 /* Pods-TV Shows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.debug.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.debug.xcconfig"; sourceTree = "<group>"; };
@@ -83,6 +89,9 @@
 				AD4319E028876D1500124AD1 /* Home.storyboard */,
 				AD4319E228876D2C00124AD1 /* HomeViewController.swift */,
 				AD4319EC2888888B00124AD1 /* User.swift */,
+				AD761E80289074DA001811D6 /* ShowList.swift */,
+				AD761E8528908DD0001811D6 /* TvShowTableViewCell.swift */,
+				AD761E8628908DD0001811D6 /* TvShowTableViewCell.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -108,6 +117,7 @@
 		AD538CCE2875F49500C7FCDA /* TV Shows */ = {
 			isa = PBXGroup;
 			children = (
+				AD761E8228907D9E001811D6 /* Utility */,
 				AD4319DF28876CD000124AD1 /* Home */,
 				AD86D273287C70AF0049FD11 /* Login */,
 				AD538CCF2875F49500C7FCDA /* AppDelegate.swift */,
@@ -115,9 +125,16 @@
 				AD538CD82875F49C00C7FCDA /* Assets.xcassets */,
 				AD538CDA2875F49C00C7FCDA /* LaunchScreen.storyboard */,
 				AD538CDD2875F49C00C7FCDA /* Info.plist */,
-				AD4319E62888748D00124AD1 /* Constants.swift */,
 			);
 			path = "TV Shows";
+			sourceTree = "<group>";
+		};
+		AD761E8228907D9E001811D6 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				AD4319E62888748D00124AD1 /* Constants.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		AD86D273287C70AF0049FD11 /* Login */ = {
@@ -194,6 +211,7 @@
 				AD538CD92875F49C00C7FCDA /* Assets.xcassets in Resources */,
 				AD86D275287C70EF0049FD11 /* Login.storyboard in Resources */,
 				AD4319E128876D1500124AD1 /* Home.storyboard in Resources */,
+				AD761E8828908DD0001811D6 /* TvShowTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,12 +264,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD761E8728908DD0001811D6 /* TvShowTableViewCell.swift in Sources */,
 				AD4319DB28874BDF00124AD1 /* UnderlinedTextField.swift in Sources */,
 				AD86D277287C710B0049FD11 /* LoginViewController.swift in Sources */,
 				AD538CD02875F49500C7FCDA /* AppDelegate.swift in Sources */,
 				AD538CD22875F49500C7FCDA /* SceneDelegate.swift in Sources */,
 				AD4319ED2888888B00124AD1 /* User.swift in Sources */,
 				AD4319E72888748D00124AD1 /* Constants.swift in Sources */,
+				AD761E81289074DA001811D6 /* ShowList.swift in Sources */,
 				AD4319E328876D2C00124AD1 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

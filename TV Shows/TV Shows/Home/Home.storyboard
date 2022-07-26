@@ -176,20 +176,57 @@
             </objects>
             <point key="canvasLocation" x="-822" y="52"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Shows-->
         <scene sceneID="bBp-QI-SpB">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="858-r2-yfj" customClass="HomeViewController" customModule="TV_Shows" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" title="Shows" id="858-r2-yfj" customClass="HomeViewController" customModule="TV_Shows" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A8u-Cw-Ypg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NNp-Kf-AKH">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TvShowTableViewCell" id="7pm-9k-LOp" customClass="TvShowTableViewCell" customModule="TV_Shows" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7pm-9k-LOp" id="XyI-P7-KwW">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8S-nT-5xU">
+                                                    <rect key="frame" x="186.5" y="11.5" width="41.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="t8S-nT-5xU" firstAttribute="centerY" secondItem="XyI-P7-KwW" secondAttribute="centerY" id="0Q2-ez-ybK"/>
+                                                <constraint firstItem="t8S-nT-5xU" firstAttribute="centerX" secondItem="XyI-P7-KwW" secondAttribute="centerX" id="3Gx-te-uHk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="OSH-yb-TuA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NNp-Kf-AKH" firstAttribute="top" secondItem="OSH-yb-TuA" secondAttribute="top" id="1ws-q2-zia"/>
+                            <constraint firstItem="OSH-yb-TuA" firstAttribute="bottom" secondItem="NNp-Kf-AKH" secondAttribute="bottom" id="Fmc-hp-NS7"/>
+                            <constraint firstItem="OSH-yb-TuA" firstAttribute="trailing" secondItem="NNp-Kf-AKH" secondAttribute="trailing" id="ZZp-Tw-Zb1"/>
+                            <constraint firstItem="NNp-Kf-AKH" firstAttribute="leading" secondItem="OSH-yb-TuA" secondAttribute="leading" id="seB-AD-Dww"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="showsTableView" destination="NNp-Kf-AKH" id="GU1-I4-Jb1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iNo-NY-2MF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="255" y="52"/>
+            <point key="canvasLocation" x="253.62318840579712" y="51.5625"/>
         </scene>
     </scenes>
     <resources>
