@@ -20,5 +20,6 @@ enum Constants {
     
     enum Assets {
         static var visibilityIcon = "visibility-icon.png"
+        static var nonVisibileIcon = "visibility-2-icon.png"
     }
 }

@@ -15,12 +15,15 @@ final class LoginViewController : UIViewController {
     
     private var user: User?
     private var headers: HTTPHeaders?
+    private var visibilityButton: UIButton?
 
     // MARK: - Outlets
     
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
-
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
+    
     // MARK: - Actions
     
     @IBAction func loginButtonTapped() {
@@ -44,7 +47,19 @@ final class LoginViewController : UIViewController {
     }
     
     @IBAction func setPasswordVisibilityButton(sender: UIButton) {
+        guard let visibilityButton = visibilityButton else { return }
         passwordTextField.isSecureTextEntry.toggle()
+        if passwordTextField.isSecureTextEntry == true {
+            visibilityButton.setImage(UIImage(named: Constants.Assets.visibilityIcon), for: .normal)
+        } else {
+            visibilityButton.setImage(UIImage(named: Constants.Assets.nonVisibileIcon), for: .normal)
+        }
+    }
+    @IBAction func emailTextChanged(_ sender: Any) {
+        updateButtonState()
+    }
+    @IBAction func passwordTextChanged(_ sender: Any) {
+        updateButtonState()
     }
     
     // MARK: - Lifecycle methods
@@ -69,10 +84,17 @@ final class LoginViewController : UIViewController {
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
         )
         passwordTextField.isSecureTextEntry.toggle()
-        let visibilityButton = UIButton(type: .custom)
-        visibilityButton.setImage(UIImage(named: Constants.Assets.visibilityIcon), for: .normal)
-        visibilityButton.addTarget(self, action: #selector(setPasswordVisibilityButton(sender: )), for: .touchUpInside)
+        visibilityButton = UIButton(type: .custom)
+        visibilityButton!.setImage(UIImage(named: Constants.Assets.visibilityIcon), for: .normal)
+        visibilityButton!.addTarget(self, action: #selector(setPasswordVisibilityButton(sender: )), for: .touchUpInside)
         passwordTextField.rightView = visibilityButton
+        passwordTextField.rightViewMode = .always
+        
+        // setup buttons
+        updateButtonState()
+        registerButton.setTitleColor(.white, for: .disabled)
+        registerButton.alpha = 0.5
+        registerButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
     }
 }
 
@@ -171,9 +193,19 @@ private extension LoginViewController {
     }
 }
 
-extension LoginViewController : UITextFieldDelegate {
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return self.emailTextField.hasText && self.passwordTextField.hasText
-    }
+extension LoginViewController {
 
+    private func updateButtonState() -> Void {
+        
+        if !self.emailTextField.hasText || !self.passwordTextField.hasText {
+            loginButton.isEnabled = false
+            registerButton.isEnabled = false
+            registerButton.alpha = 0.5
+            registerButton.setTitleColor(.white, for: .disabled)
+        } else {
+            loginButton.isEnabled = true
+            registerButton.isEnabled = true
+            registerButton.alpha = 0.5
+        }
+    }
 }

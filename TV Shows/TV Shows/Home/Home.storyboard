@@ -66,6 +66,9 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" textContentType="email"/>
+                                        <connections>
+                                            <action selector="emailTextChanged:" destination="EIe-Qt-I4w" eventType="editingChanged" id="lNH-tz-KtA"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1dr-Db-2F8" customClass="UnderlinedTextField" customModule="TV_Shows" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="186.5" width="374" height="40"/>
@@ -76,6 +79,9 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" textContentType="password"/>
+                                        <connections>
+                                            <action selector="passwordTextChanged:" destination="EIe-Qt-I4w" eventType="editingChanged" id="q3R-ts-1T4"/>
+                                        </connections>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="mgC-MP-D6g">
                                         <rect key="frame" x="0.0" y="256.5" width="374" height="171.5"/>
@@ -117,7 +123,7 @@
                                                             <backgroundConfiguration key="background" cornerRadius="44">
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </backgroundConfiguration>
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="17"/>
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
                                                             <color key="baseForegroundColor" red="0.32156884670000002" green="0.21176743510000001" blue="0.54900860789999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </buttonConfiguration>
                                                         <connections>
@@ -161,7 +167,9 @@
                     <navigationItem key="navigationItem" id="0j8-nA-Pt8"/>
                     <connections>
                         <outlet property="emailTextField" destination="vrd-dP-HVS" id="1ev-bf-cBw"/>
+                        <outlet property="loginButton" destination="saZ-q1-Uep" id="PhQ-xU-IPV"/>
                         <outlet property="passwordTextField" destination="1dr-Db-2F8" id="MdP-bR-oGr"/>
+                        <outlet property="registerButton" destination="dem-3i-nHY" id="Wo4-5k-gMk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hxn-Na-GJG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
