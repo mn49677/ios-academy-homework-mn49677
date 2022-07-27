@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,11 +12,30 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <view key="view" contentMode="scaleToFill" id="lYM-mK-OLb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-white" translatesAutoresizingMaskIntoConstraints="NO" id="OKI-bz-XBR">
+                                <rect key="frame" x="126" y="429" width="162" height="38"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-right" translatesAutoresizingMaskIntoConstraints="NO" id="wzw-al-4cd">
+                                <rect key="frame" x="212" y="0.0" width="202" height="266"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-left" translatesAutoresizingMaskIntoConstraints="NO" id="Jgn-8h-rzy">
+                                <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="psA-QZ-I7T"/>
+                        <color key="backgroundColor" red="0.32156884670000002" green="0.21176743510000001" blue="0.54900860789999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Jgn-8h-rzy" firstAttribute="top" secondItem="lYM-mK-OLb" secondAttribute="top" id="1li-an-lZ0"/>
+                            <constraint firstItem="Jgn-8h-rzy" firstAttribute="leading" secondItem="psA-QZ-I7T" secondAttribute="leading" id="2np-wV-4Q4"/>
+                            <constraint firstItem="OKI-bz-XBR" firstAttribute="centerX" secondItem="lYM-mK-OLb" secondAttribute="centerX" id="Dug-Qx-WOR"/>
+                            <constraint firstItem="psA-QZ-I7T" firstAttribute="trailing" secondItem="wzw-al-4cd" secondAttribute="trailing" id="d4C-xI-Md4"/>
+                            <constraint firstItem="OKI-bz-XBR" firstAttribute="centerY" secondItem="lYM-mK-OLb" secondAttribute="centerY" id="gr1-Wv-zZQ"/>
+                            <constraint firstItem="wzw-al-4cd" firstAttribute="top" secondItem="lYM-mK-OLb" secondAttribute="top" id="qEi-yx-c08"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -22,4 +43,9 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo-white" width="162" height="38"/>
+        <image name="splash-top-left" width="140" height="100"/>
+        <image name="splash-top-right" width="202" height="266"/>
+    </resources>
 </document>
