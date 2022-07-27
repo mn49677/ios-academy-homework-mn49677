@@ -11,6 +11,7 @@ class ReviewTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var showRatingView: RatingView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,5 +27,8 @@ class ReviewTableViewCell: UITableViewCell {
     public func configure(email: String, rating: Int, comment: String){
         userLabel.text = email
         commentLabel.text = comment
+        showRatingView.rating = rating
+        showRatingView.isEnabled = false
+        showRatingView.sizeToFit()
     }
 }
