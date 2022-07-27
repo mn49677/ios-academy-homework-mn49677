@@ -26,7 +26,7 @@ struct Pagination: Codable {
 // MARK: - Show
 struct Show: Codable {
     let id: String
-    let averageRating: Int
+    let averageRating: Float
     let showDescription: String
     let imageURL: String
     let noOfReviews: Int

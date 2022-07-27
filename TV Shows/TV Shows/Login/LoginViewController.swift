@@ -68,6 +68,10 @@ final class LoginViewController : UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        #if DEBUG
+        emailTextField.text = "john@doe.com"
+        passwordTextField.text = "test1234"
+        #endif
     }
     
     // MARK: - Methods
