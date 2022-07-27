@@ -10,11 +10,13 @@ import UIKit
 final class ShowDetailsViewController: UIViewController {
     
     // MARK: - Properties
-    private var authInfo: AuthInfo?
-    private var show: Show?
-
+    public var authInfo: AuthInfo?
+    public var show: Show?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = show?.title ?? "Unknown title"
     }
 
+    
 }

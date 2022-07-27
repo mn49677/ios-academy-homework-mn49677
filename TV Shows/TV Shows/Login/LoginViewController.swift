@@ -177,10 +177,7 @@ private extension LoginViewController {
         self.userResponse = userResponse
         print("User email: \(String(describing: userResponse.user.email))")
         print("User id: \(String(describing: userResponse.user.id))")
-        canGoToHomeController += 1
-        if canGoToHomeController == 2 {
-            pushHomeViewController()
-        }
+        pushHomeViewController()
     }
     
     // MARK: - Handle failed login or registration
@@ -203,7 +200,6 @@ private extension LoginViewController {
         }
         if let homeController = homeController {
             navigationController?.setViewControllers([homeController], animated: true)
-            // navigationController?.pushViewController(homeController, animated: true)
         }
     }
 }

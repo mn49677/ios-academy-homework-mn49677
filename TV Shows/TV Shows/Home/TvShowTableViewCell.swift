@@ -7,9 +7,9 @@
 
 import UIKit
 
-class TvShowTableViewCell: UITableViewCell {
+final class TvShowTableViewCell: UITableViewCell {
     
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {

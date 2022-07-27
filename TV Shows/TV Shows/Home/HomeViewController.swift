@@ -90,7 +90,7 @@ extension HomeViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let item = shows[indexPath.row]
         print("Selected Item: \(item)")
-        
+        pushShowDetailsViewController(withShowAt: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -116,4 +116,19 @@ private extension HomeViewController {
         showsTableView.register(UINib.init(nibName: "TvShowTableViewCell", bundle: nil), forCellReuseIdentifier: "TvShowTableViewCell")
     }
     
+}
+
+private extension HomeViewController {
+    
+    // MARK: - Private methods
+        
+    func pushShowDetailsViewController(withShowAt indexRow: Int) {
+        let detailsController = storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.details) as? ShowDetailsViewController
+        if let detailsController = detailsController {
+            guard let authInfo = authInfo else { return }
+            detailsController.authInfo = authInfo
+            detailsController.show = shows[indexRow]
+            navigationController?.pushViewController(detailsController, animated: true)
+        }
+    }
 }

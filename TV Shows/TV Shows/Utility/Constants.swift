@@ -9,17 +9,18 @@ import Foundation
 
 enum Constants {
     enum ViewControllers {
-        static var login = "LoginViewController"
-        static var home = "HomeViewController"
+        static var login   = "LoginViewController"
+        static var home    = "HomeViewController"
+        static var details = "ShowDetailsViewController"
     }
     
     enum Storyboards {
-        static var login = "Login"
+        static var login  = "Login"
         static var splash = "SplashScreen"
     }
     
     enum Assets {
-        static var visibilityIcon = "visibility-icon.png"
+        static var visibilityIcon  = "visibility-icon.png"
         static var nonVisibileIcon = "visibility-2-icon.png"
     }
 }
