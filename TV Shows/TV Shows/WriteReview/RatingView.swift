@@ -128,6 +128,15 @@ private extension RatingView {
 
     func setRating(_ rating: Int) {
         // TODO: Your code goes here
+        ratingValue = rating
+        for (index,item) in ratingButtons.enumerated() {
+            if index <= rating {
+                item.isSelected = true
+            } else {
+                item.isSelected = false
+            }
+        }
+
     }
 
     func currentSelectedRating() -> Int {

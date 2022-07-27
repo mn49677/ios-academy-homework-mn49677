@@ -29,12 +29,7 @@ class WriteReviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        navigationItem.title = "Write a review"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(close))
-        ratingView.configure(withStyle: .small)
-        ratingView.isEnabled = false
+        setupUI()
     }
 }
 
@@ -68,5 +63,14 @@ extension WriteReviewViewController {
                     print(error)
                 }
             }
+    }
+}
+
+extension WriteReviewViewController {
+    func setupUI() {
+        navigationItem.title = "Write a review"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(close))
+        ratingView.configure(withStyle: .small)
+        ratingView.isEnabled = true
     }
 }
