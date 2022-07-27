@@ -66,6 +66,8 @@ private extension HomeViewController {
 
 extension HomeViewController : UITableViewDataSource {
     
+    // MARK: - UITableView data loading delegate
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shows.count
     }
@@ -88,6 +90,7 @@ extension HomeViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let item = shows[indexPath.row]
         print("Selected Item: \(item)")
+        
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

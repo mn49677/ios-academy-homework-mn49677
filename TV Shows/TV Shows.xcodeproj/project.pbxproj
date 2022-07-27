@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A323AB65782649833A57976 /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD49A9913549BF3799DE5D21 /* Pods_TV_Shows.framework */; };
+		AD2F646C28914707002AB305 /* ShowDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2F646B28914707002AB305 /* ShowDetailsViewController.swift */; };
 		AD4319DB28874BDF00124AD1 /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4319DA28874BDF00124AD1 /* UnderlinedTextField.swift */; };
 		AD4319E128876D1500124AD1 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD4319E028876D1500124AD1 /* Home.storyboard */; };
 		AD4319E328876D2C00124AD1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4319E228876D2C00124AD1 /* HomeViewController.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		5391A98C485E2D87C6C5812C /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
+		AD2F646B28914707002AB305 /* ShowDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsViewController.swift; sourceTree = "<group>"; };
 		AD4319DA28874BDF00124AD1 /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		AD4319E028876D1500124AD1 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		AD4319E228876D2C00124AD1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		AD2F646A289146C0002AB305 /* ShowDetails */ = {
+			isa = PBXGroup;
+			children = (
+				AD2F646B28914707002AB305 /* ShowDetailsViewController.swift */,
+			);
+			path = ShowDetails;
+			sourceTree = "<group>";
+		};
 		AD4319DC2887575400124AD1 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,9 +127,10 @@
 		AD538CCE2875F49500C7FCDA /* TV Shows */ = {
 			isa = PBXGroup;
 			children = (
-				AD761E8228907D9E001811D6 /* Utility */,
-				AD4319DF28876CD000124AD1 /* Home */,
 				AD86D273287C70AF0049FD11 /* Login */,
+				AD4319DF28876CD000124AD1 /* Home */,
+				AD2F646A289146C0002AB305 /* ShowDetails */,
+				AD761E8228907D9E001811D6 /* Utility */,
 				AD538CCF2875F49500C7FCDA /* AppDelegate.swift */,
 				AD538CD12875F49500C7FCDA /* SceneDelegate.swift */,
 				AD538CD82875F49C00C7FCDA /* Assets.xcassets */,
@@ -270,6 +281,7 @@
 				AD538CD02875F49500C7FCDA /* AppDelegate.swift in Sources */,
 				AD538CD22875F49500C7FCDA /* SceneDelegate.swift in Sources */,
 				AD4319ED2888888B00124AD1 /* User.swift in Sources */,
+				AD2F646C28914707002AB305 /* ShowDetailsViewController.swift in Sources */,
 				AD4319E72888748D00124AD1 /* Constants.swift in Sources */,
 				AD761E81289074DA001811D6 /* ShowList.swift in Sources */,
 				AD4319E328876D2C00124AD1 /* HomeViewController.swift in Sources */,

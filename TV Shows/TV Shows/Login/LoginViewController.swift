@@ -156,6 +156,8 @@ private extension LoginViewController {
             .responseDecodable(of: UserResponse.self) { [weak self] dataResponse in
                 guard let self = self else { return }
                 MBProgressHUD.hide(for: self.view, animated: true)
+                self.headers = dataResponse.response?.headers.dictionary
+                print("Saved headers: \(String(describing: self.headers))")
                 switch dataResponse.result {
                 case .success(let userResponse):
                     self.responseToSuccess(userResponse: userResponse)
@@ -164,16 +166,6 @@ private extension LoginViewController {
                 }
                 print("user response saved")
             }
-            .responseJSON { [weak self] response in
-                guard let headersValue = response.response?.allHeaderFields as? Dictionary<String, String> else { return }
-                self?.headers = headersValue
-                self?.canGoToHomeController += 1
-                if self?.canGoToHomeController == 2 {
-                    self?.pushHomeViewController()
-                }
-                print("Saved headers: \(headersValue)")
-            }
-        
     }
 }
 

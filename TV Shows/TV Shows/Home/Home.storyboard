@@ -226,7 +226,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iNo-NY-2MF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="253.62318840579712" y="51.5625"/>
+            <point key="canvasLocation" x="138" y="52"/>
+        </scene>
+        <!--Show Details View Controller-->
+        <scene sceneID="BOP-x7-p3o">
+            <objects>
+                <viewController id="suh-vL-Ptx" customClass="ShowDetailsViewController" customModule="TV_Shows" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zRe-82-hlX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="khQ-Fm-Rfb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FKa-AQ-Xa0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1114" y="52"/>
         </scene>
     </scenes>
     <resources>
