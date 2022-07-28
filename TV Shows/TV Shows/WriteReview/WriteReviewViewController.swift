@@ -20,6 +20,7 @@ class WriteReviewViewController: UIViewController {
     
     @IBOutlet private weak var ratingView: RatingView!
     @IBOutlet weak var commentTextView: UITextField!
+    @IBOutlet weak var submitButton: UIButton!
     
     @IBAction func submitButtonClicked(_ sender: Any) {
         guard let showId = showId else { return }
@@ -43,17 +44,21 @@ extension WriteReviewViewController {
 extension WriteReviewViewController {
     func PostReview(rating: Int, comment: String, show_id: Int) {
         guard let authInfo = authInfo else { return }
-        let parameters = ReviewParameters(rating: rating, comment: comment, showID: show_id)
+        let parameters = [
+            "comment" : "Comment",
+            "show_id" : 1,
+            "rating" : 1
+        ] as [String : Any]
         AF
             .request(
                 "https://tv-shows.infinum.academy/reviews",
                 method: .post,
                 parameters: parameters,
-                encoder: JSONParameterEncoder.default,
+                encoding: JSONEncoding.default,
                 headers: HTTPHeaders(authInfo.headers)
             )
             .validate()
-            .responseDecodable(of: UserResponse.self) { [weak self] dataResponse in
+            .responseDecodable(of: ReturnReviewResponse.self) { [weak self] dataResponse in
                 guard let self = self else { return }
                 MBProgressHUD.hide(for: self.view, animated: true)
                 switch dataResponse.result {
@@ -72,5 +77,16 @@ extension WriteReviewViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(close))
         ratingView.configure(withStyle: .small)
         ratingView.isEnabled = true
+        commentTextView.delegate = self
+    }
+}
+
+extension WriteReviewViewController : UITextFieldDelegate{
+    func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
+        if(textView.text.isEmpty){
+            submitButton.isEnabled = false
+        } else {
+            submitButton.isEnabled = true
+        }
     }
 }

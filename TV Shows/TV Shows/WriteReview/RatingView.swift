@@ -128,7 +128,7 @@ private extension RatingView {
 
     func setRating(_ rating: Int) {
         // TODO: Your code goes here
-        ratingValue = rating
+        ratingValue = rating + 1
         for (index,item) in ratingButtons.enumerated() {
             if index <= rating {
                 item.isSelected = true
@@ -159,7 +159,7 @@ private extension RatingView {
 }
 
 
-// MARK: - Welcome
+// MARK: - Review parameters
 struct ReviewParameters: Codable {
     let rating: Int
     let comment: String
@@ -168,5 +168,33 @@ struct ReviewParameters: Codable {
     enum CodingKeys: String, CodingKey {
         case rating, comment
         case showID = "show_id"
+    }
+}
+
+// MARK: - Review return value
+
+struct ReturnReviewResponse: Codable {
+    let review: ReturnReview
+}
+
+struct ReturnReview: Codable {
+    let id, comment: String
+    let rating, showID: Int
+    let user: ReturnUser
+
+    enum CodingKeys: String, CodingKey {
+        case id, comment, rating
+        case showID = "show_id"
+        case user
+    }
+}
+
+struct ReturnUser: Codable {
+    let id, email: String
+    let imageURL: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, email
+        case imageURL = "image_url"
     }
 }

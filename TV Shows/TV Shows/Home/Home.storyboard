@@ -356,6 +356,7 @@
                     <connections>
                         <outlet property="commentTextView" destination="fit-w4-zMG" id="lGI-yj-Eoz"/>
                         <outlet property="ratingView" destination="FxA-Ls-CWw" id="cXj-zp-K1V"/>
+                        <outlet property="submitButton" destination="q5F-us-3jg" id="pVm-vW-Aht"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KIG-1z-ORM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
