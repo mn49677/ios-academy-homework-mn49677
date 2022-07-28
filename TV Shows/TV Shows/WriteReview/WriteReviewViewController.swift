@@ -25,7 +25,7 @@ class WriteReviewViewController: UIViewController {
     @IBAction func submitButtonClicked(_ sender: Any) {
         guard let showId = showId else { return }
         guard let comment = commentTextView.text else { return }
-        PostReview(rating: ratingView.rating, comment: comment, show_id: showId)
+        postReview(rating: ratingView.rating, comment: comment, show_id: showId)
     }
     
     override func viewDidLoad() {
@@ -42,12 +42,12 @@ extension WriteReviewViewController {
 }
 
 extension WriteReviewViewController {
-    func PostReview(rating: Int, comment: String, show_id: Int) {
+    func postReview(rating: Int, comment: String, show_id: Int) {
         guard let authInfo = authInfo else { return }
         let parameters = [
-            "comment" : "Comment",
-            "show_id" : 1,
-            "rating" : 1
+            "comment" : comment,
+            "show_id" : show_id,
+            "rating" : rating
         ] as [String : Any]
         AF
             .request(
