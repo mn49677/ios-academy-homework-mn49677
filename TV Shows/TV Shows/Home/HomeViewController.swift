@@ -13,61 +13,57 @@ final class HomeViewController: UIViewController {
     
     // MARK: - Outlets
     
-    @IBOutlet weak var showsTableView: UITableView!
+    @IBOutlet private weak var showsTableView: UITableView!
     
     // MARK: - Properties
     
-    public var userResponse: UserResponse?
-    public var authInfo: AuthInfo?
+    var userResponse: UserResponse?
+    var authInfo: AuthInfo?
     private var shows: [Show] = []
-    private var currentPage: Int = 1
-    private let numberOfCellsPerPage: Int = 20
+    private var currentPage = 1
+    private let numberOfCellsPerPage = 20
     
     // MARK: - Lifecycle methods
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        getShowsResponse(page: currentPage, numberOfCells: numberOfCellsPerPage)
+        getShowsResponse()
         setupTableView()
     }
 }
 
+// MARK: - API communication
+
 private extension HomeViewController {
     
-    // MARK: - API communication
-    
-    func getShowsResponse(page: Int, numberOfCells: Int){
+    func getShowsResponse(){
         guard let authInfo = authInfo else { return }
         MBProgressHUD.showAdded(to: view, animated: true)
         AF .request(
               "https://tv-shows.infinum.academy/shows",
               method: .get,
-              parameters: ["page": String(page), "items": String(numberOfCells)], // pagination arguments
+              parameters: ["page": String(currentPage), "items": String(numberOfCellsPerPage)], // pagination arguments
               headers: HTTPHeaders(authInfo.headers)
           )
           .validate()
           .responseDecodable(of: ShowsResponse.self) { [weak self] dataResponse in
               guard let self = self else { return }
               MBProgressHUD.hide(for: self.view, animated: true)
+              
               switch dataResponse.result {
               case .success(let showsResponse):
-                  if self.currentPage < showsResponse.meta.pagination.pages {
-                      self.shows.append(contentsOf: showsResponse.shows)
-                      print("Success loading shows")
-                      self.showsTableView.reloadData()
-                  }
-                  
-              case .failure(let error):
-                  print(error)
+                  self.onSuccess(showsResponse)
+              case .failure(_):
+                  self.onError()
               }
           }
     }
 }
 
+// MARK: - UITableView data loading delegate
+
 extension HomeViewController : UITableViewDataSource {
-    
-    // MARK: - UITableView data loading delegate
-    
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shows.count
     }
@@ -82,10 +78,10 @@ extension HomeViewController : UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate for selecting and pagination
+
 extension HomeViewController: UITableViewDelegate {
-    
-    // MARK: - UITableViewDelegate
-    
+        
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let item = shows[indexPath.row]
@@ -94,17 +90,17 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row > currentPage * numberOfCellsPerPage - 5 {
+        if indexPath.row == shows.count - 1 {
             currentPage += 1
-            getShowsResponse(page: currentPage, numberOfCells: numberOfCellsPerPage)
+            getShowsResponse()
         }
     }
 }
 
+// MARK: - Setup table view
+
 private extension HomeViewController {
-    
-    // MARK: - Setup table view
-    
+        
     func setupTableView() {
         showsTableView.estimatedRowHeight = 110
         showsTableView.rowHeight = UITableView.automaticDimension
@@ -118,17 +114,34 @@ private extension HomeViewController {
     
 }
 
+// MARK: - Navigation
+
+private extension HomeViewController {
+            
+    func pushShowDetailsViewController(withShowAt indexRow: Int) {
+        let detailsController =
+            storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.details) as! ShowDetailsViewController
+        detailsController.authInfo = authInfo
+        detailsController.show = shows[indexRow]
+        navigationController?.pushViewController(detailsController, animated: true)
+    }
+}
+
+// MARK: - API Response handlers
+
 private extension HomeViewController {
     
-    // MARK: - Private methods
-        
-    func pushShowDetailsViewController(withShowAt indexRow: Int) {
-        let detailsController = storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.details) as? ShowDetailsViewController
-        if let detailsController = detailsController {
-            guard let authInfo = authInfo else { return }
-            detailsController.authInfo = authInfo
-            detailsController.show = shows[indexRow]
-            navigationController?.pushViewController(detailsController, animated: true)
+    private func onError() {
+        let alert = UIAlertController(title: "Failed loading shows!", message: "Failed loading shows. Please restart the app and relogin.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func onSuccess(_ showsResponse: ShowsResponse) {
+        if self.currentPage < showsResponse.meta.pagination.pages {
+            self.shows.append(contentsOf: showsResponse.shows)
+            self.showsTableView.reloadData()
         }
     }
 }
+

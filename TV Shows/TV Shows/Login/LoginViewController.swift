@@ -14,9 +14,8 @@ final class LoginViewController : UIViewController {
     // MARK: - Properties
     
     private var userResponse: UserResponse?
-    private var headers: Dictionary<String, String>?
+    private var headers: [String: String]?
     private var visibilityButton: UIButton?
-    private var canGoToHomeController: Int = 0
 
     // MARK: - Outlets
     
@@ -161,7 +160,6 @@ private extension LoginViewController {
                 guard let self = self else { return }
                 MBProgressHUD.hide(for: self.view, animated: true)
                 self.headers = dataResponse.response?.headers.dictionary
-                print("Saved headers: \(String(describing: self.headers))")
                 switch dataResponse.result {
                 case .success(let userResponse):
                     self.responseToSuccess(userResponse: userResponse)
@@ -173,45 +171,39 @@ private extension LoginViewController {
     }
 }
 
+// MARK: - API handling
+
 private extension LoginViewController {
-    
-    // MARK: - Handle successful login or registration
-    
+        
     func responseToSuccess(userResponse: UserResponse){
         self.userResponse = userResponse
-        print("User email: \(String(describing: userResponse.user.email))")
-        print("User id: \(String(describing: userResponse.user.id))")
         pushHomeViewController()
     }
-    
-    // MARK: - Handle failed login or registration
-    
+        
     func responseToError(error: AFError){
-        print("Error: \(error)")
         showSimpleAlert()
-    }
-    
-    // MARK: - Push home view controller
-    
-    func pushHomeViewController() {
-        guard let headers = headers else { return }
-        let homeController = storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.home) as? HomeViewController
-        homeController?.userResponse = userResponse
-        do {
-            try homeController?.authInfo = AuthInfo(headers: headers)
-        } catch {
-            print("Fail")
-        }
-        if let homeController = homeController {
-            navigationController?.setViewControllers([homeController], animated: true)
-        }
     }
 }
 
-extension LoginViewController {
-    
-    // MARK: - Other internal methods
+// MARK: - Push home view controller
 
+private extension LoginViewController {
+    
+    func pushHomeViewController() {
+        guard let headers = headers else { return }
+        let homeController = storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.home) as! HomeViewController
+        homeController.userResponse = userResponse
+        do {
+            try homeController.authInfo = AuthInfo(headers: headers)
+        } catch { }
+        navigationController?.setViewControllers([homeController], animated: true)
+    }
+}
+
+// MARK: - Other internal methods
+
+private extension LoginViewController {
+    
     private func updateButtonState() -> Void {
         
         if !self.emailTextField.hasText || !self.passwordTextField.hasText {
@@ -228,9 +220,7 @@ extension LoginViewController {
     
     func showSimpleAlert() {
         let alert = UIAlertController(title: "Login/registration failed.", message: "Please try again.", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
-                //Cancel Action
-            }))
-        self.present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        present(alert, animated: true, completion: nil)
     }
 }

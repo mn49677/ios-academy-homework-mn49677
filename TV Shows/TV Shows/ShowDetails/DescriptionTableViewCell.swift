@@ -11,19 +11,8 @@ final class DescriptionTableViewCell: UITableViewCell {
     
     // MARK: - Outlets
     
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var reviewSummaryLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var reviewSummaryLabel: UILabel!
     
     public func configure(description: String, numberOfReviews: Int, averageRating: Float) {
         descriptionLabel.text = description

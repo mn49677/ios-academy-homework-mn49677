@@ -13,14 +13,14 @@ class WriteReviewViewController: UIViewController {
     
     // MARK: - Properties
     
-    public var authInfo: AuthInfo?
-    public var showId: Int?
+    var authInfo: AuthInfo?
+    var showId: Int?
     
     // MARK: - Outlets
     
     @IBOutlet private weak var ratingView: RatingView!
-    @IBOutlet weak var commentTextView: UITextField!
-    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet private weak var commentTextView: UITextField!
+    @IBOutlet private weak var submitButton: UIButton!
     
     @IBAction func submitButtonClicked(_ sender: Any) {
         guard let showId = showId else { return }
@@ -59,10 +59,11 @@ extension WriteReviewViewController {
             )
             .validate()
             .responseDecodable(of: ReturnReviewResponse.self) { [weak self] dataResponse in
+                
                 guard let self = self else { return }
                 MBProgressHUD.hide(for: self.view, animated: true)
                 switch dataResponse.result {
-                case .success(let userResponse):
+                case .success(_):
                     print("Success")
                 case .failure(let error):
                     print(error)
@@ -75,7 +76,7 @@ extension WriteReviewViewController {
     func setupUI() {
         navigationItem.title = "Write a review"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(close))
-        ratingView.configure(withStyle: .small)
+        ratingView.configure(withStyle: .large)
         ratingView.isEnabled = true
         commentTextView.delegate = self
     }
