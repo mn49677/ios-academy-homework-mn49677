@@ -13,8 +13,8 @@ final class LoginViewController : UIViewController {
     
     // MARK: - Properties
     
-    private var user: User?
-    private var headers: HTTPHeaders?
+    private var userResponse: UserResponse?
+    private var headers: [String: String]?
     private var visibilityButton: UIButton?
 
     // MARK: - Outlets
@@ -67,6 +67,10 @@ final class LoginViewController : UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        #if DEBUG
+        emailTextField.text = "john@doe.com"
+        passwordTextField.text = "test1234"
+        #endif
     }
     
     // MARK: - Methods
@@ -116,8 +120,7 @@ private extension LoginViewController {
                 "https://tv-shows.infinum.academy/users",
                 method: .post,
                 parameters: parameters,
-                encoder: JSONParameterEncoder.default,
-                headers: headers
+                encoder: JSONParameterEncoder.default
             )
             .validate()
             .responseDecodable(of: UserResponse.self) { [weak self] dataResponse in
@@ -156,47 +159,51 @@ private extension LoginViewController {
             .responseDecodable(of: UserResponse.self) { [weak self] dataResponse in
                 guard let self = self else { return }
                 MBProgressHUD.hide(for: self.view, animated: true)
+                self.headers = dataResponse.response?.headers.dictionary
                 switch dataResponse.result {
                 case .success(let userResponse):
                     self.responseToSuccess(userResponse: userResponse)
                 case .failure(let error):
                     self.responseToError(error: error)
                 }
+                print("user response saved")
             }
     }
 }
 
+// MARK: - API handling
+
 private extension LoginViewController {
-    
-    // MARK: - Handle successful login or registration
-    
+        
     func responseToSuccess(userResponse: UserResponse){
-        user = userResponse.user
-        print("User email: \(String(describing: self.user?.email))")
-        print("User id: \(String(describing: self.user?.id))")
+        self.userResponse = userResponse
         pushHomeViewController()
     }
-    
-    // MARK: - Handle failed login or registration
-    
+        
     func responseToError(error: AFError){
-        print("Error: \(error)")
-    }
-    
-    // MARK: - Push home view controller
-    
-    func pushHomeViewController() {
-        let homeController = self.storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.home)
-        if let homeController = homeController {
-            navigationController?.pushViewController(homeController, animated: true)
-        }
+        showSimpleAlert()
     }
 }
 
-extension LoginViewController {
-    
-    // MARK: - Other internal methods
+// MARK: - Push home view controller
 
+private extension LoginViewController {
+    
+    func pushHomeViewController() {
+        guard let headers = headers else { return }
+        let homeController = storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.home) as! HomeViewController
+        homeController.userResponse = userResponse
+        do {
+            try homeController.authInfo = AuthInfo(headers: headers)
+        } catch { }
+        navigationController?.setViewControllers([homeController], animated: true)
+    }
+}
+
+// MARK: - Other internal methods
+
+private extension LoginViewController {
+    
     private func updateButtonState() -> Void {
         
         if !self.emailTextField.hasText || !self.passwordTextField.hasText {
@@ -209,5 +216,11 @@ extension LoginViewController {
             registerButton.isEnabled = true
             registerButton.alpha = 0.5
         }
+    }
+    
+    func showSimpleAlert() {
+        let alert = UIAlertController(title: "Login/registration failed.", message: "Please try again.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        present(alert, animated: true, completion: nil)
     }
 }

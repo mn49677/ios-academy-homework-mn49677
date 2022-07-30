@@ -11,6 +11,8 @@ enum Constants {
     enum ViewControllers {
         static var login = "LoginViewController"
         static var home = "HomeViewController"
+        static var details = "ShowDetailsViewController"
+        static var review = "WriteReviewViewController"
     }
     
     enum Storyboards {
