@@ -61,7 +61,8 @@ extension ShowDetailsViewController : UITableViewDataSource {
             cell.configure(
                 description: show.showDescription,
                 numberOfReviews: show.noOfReviews,
-                averageRating: show.averageRating)
+                averageRating: show.averageRating,
+                showImageUrl: show.imageURL)
             return cell
         } else {
             guard let reviewResponse = reviewResponse else { return ReviewTableViewCell() }

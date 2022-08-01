@@ -60,6 +60,7 @@
             <connections>
                 <outlet property="descriptionLabel" destination="61S-cD-KxM" id="LD3-pg-k0v"/>
                 <outlet property="reviewSummaryLabel" destination="o3U-OY-aYr" id="QJS-j3-D81"/>
+                <outlet property="showImage" destination="yGm-wc-mGE" id="vQV-26-LPD"/>
             </connections>
             <point key="canvasLocation" x="-376.08695652173918" y="-191.51785714285714"/>
         </tableViewCell>

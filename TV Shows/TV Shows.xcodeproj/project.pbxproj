@@ -11,6 +11,7 @@
 		AD2F646C28914707002AB305 /* ShowDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2F646B28914707002AB305 /* ShowDetailsViewController.swift */; };
 		AD2F6471289173F2002AB305 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2F646F289173F2002AB305 /* DescriptionTableViewCell.swift */; };
 		AD2F6472289173F2002AB305 /* DescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD2F6470289173F2002AB305 /* DescriptionTableViewCell.xib */; };
+		AD32442F2898413100EEA5F8 /* ExtensionsUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32442E2898413100EEA5F8 /* ExtensionsUIButton.swift */; };
 		AD4319DB28874BDF00124AD1 /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4319DA28874BDF00124AD1 /* UnderlinedTextField.swift */; };
 		AD4319E128876D1500124AD1 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD4319E028876D1500124AD1 /* Home.storyboard */; };
 		AD4319E328876D2C00124AD1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4319E228876D2C00124AD1 /* HomeViewController.swift */; };
@@ -37,6 +38,7 @@
 		AD2F646B28914707002AB305 /* ShowDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsViewController.swift; sourceTree = "<group>"; };
 		AD2F646F289173F2002AB305 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		AD2F6470289173F2002AB305 /* DescriptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionTableViewCell.xib; sourceTree = "<group>"; };
+		AD32442E2898413100EEA5F8 /* ExtensionsUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsUIButton.swift; sourceTree = "<group>"; };
 		AD4319DA28874BDF00124AD1 /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		AD4319E028876D1500124AD1 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		AD4319E228876D2C00124AD1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				AD4319DA28874BDF00124AD1 /* UnderlinedTextField.swift */,
+				AD32442E2898413100EEA5F8 /* ExtensionsUIButton.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				ADC684652891D63D00661E5D /* RatingView.swift in Sources */,
 				ADC6845C2891B45F00661E5D /* ReviewTableViewCell.swift in Sources */,
 				AD4319E72888748D00124AD1 /* Constants.swift in Sources */,
+				AD32442F2898413100EEA5F8 /* ExtensionsUIButton.swift in Sources */,
 				AD761E81289074DA001811D6 /* ShowList.swift in Sources */,
 				AD4319E328876D2C00124AD1 /* HomeViewController.swift in Sources */,
 			);

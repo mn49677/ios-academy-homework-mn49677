@@ -23,6 +23,7 @@ final class LoginViewController : UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var logoImage: UIImageView!
     
     // MARK: - Actions
     
@@ -67,6 +68,7 @@ final class LoginViewController : UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        animateLogo()
         #if DEBUG
         emailTextField.text = "john@doe.com"
         passwordTextField.text = "test1234"
@@ -130,7 +132,7 @@ private extension LoginViewController {
                 case .success(let userResponse):
                     self.responseToSuccess(userResponse: userResponse)
                 case .failure(let error):
-                    self.responseToError(error: error)
+                    self.responseToError(error: error, button: self.registerButton)
                 }
             }
     }
@@ -164,7 +166,7 @@ private extension LoginViewController {
                 case .success(let userResponse):
                     self.responseToSuccess(userResponse: userResponse)
                 case .failure(let error):
-                    self.responseToError(error: error)
+                    self.responseToError(error: error, button: self.loginButton)
                 }
                 print("user response saved")
             }
@@ -180,8 +182,8 @@ private extension LoginViewController {
         pushHomeViewController()
     }
         
-    func responseToError(error: AFError){
-        showSimpleAlert()
+    func responseToError(error: AFError, button: UIButton){
+        button.shake()
     }
 }
 
@@ -217,10 +219,28 @@ private extension LoginViewController {
             registerButton.alpha = 0.5
         }
     }
-    
-    func showSimpleAlert() {
-        let alert = UIAlertController(title: "Login/registration failed.", message: "Please try again.", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
-        present(alert, animated: true, completion: nil)
+}
+
+private extension LoginViewController {
+    func animateLogo() {
+        let newTransform = CGAffineTransform(
+            scaleX: 0.8, // 2 times the width
+            y: 0.8
+        )
+//        .rotated(by: 40)
+//        .translatedBy(x: 20, y: 0)
+
+        UIView.animate(
+            withDuration: 1,
+            delay: 0,
+            usingSpringWithDamping: 0.5,
+            initialSpringVelocity: 0.5,
+            options: [.curveEaseInOut, .autoreverse]) {
+
+                self.logoImage.transform = newTransform
+
+            } completion: { _ in
+                self.logoImage.transform = .identity
+            }
     }
 }

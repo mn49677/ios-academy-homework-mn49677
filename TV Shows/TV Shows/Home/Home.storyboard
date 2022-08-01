@@ -169,6 +169,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="vrd-dP-HVS" id="1ev-bf-cBw"/>
                         <outlet property="loginButton" destination="saZ-q1-Uep" id="PhQ-xU-IPV"/>
+                        <outlet property="logoImage" destination="C4H-7w-y9Z" id="jsH-CA-wSv"/>
                         <outlet property="passwordTextField" destination="1dr-Db-2F8" id="MdP-bR-oGr"/>
                         <outlet property="registerButton" destination="dem-3i-nHY" id="Wo4-5k-gMk"/>
                     </connections>
