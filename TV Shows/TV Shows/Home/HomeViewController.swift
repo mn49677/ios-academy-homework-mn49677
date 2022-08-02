@@ -62,9 +62,7 @@ private extension HomeViewController {
     
     func resolveAuthInfo() {
         if authInfo == nil {
-            do {
-                authInfo = KeychainAccess.getAuthInfo()
-            } catch {}
+            authInfo = KeychainAccess.getAuthInfo()
         }
     }
 }
@@ -111,9 +109,13 @@ extension HomeViewController: UITableViewDelegate {
 private extension HomeViewController {
         
     func setupTableView() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        
         showsTableView.estimatedRowHeight = 110
         showsTableView.rowHeight = UITableView.automaticDimension
         showsTableView.tableFooterView = UIView()
+        showsTableView.addSubview(refreshControl)
         
         showsTableView.delegate = self
         showsTableView.dataSource = self
@@ -121,6 +123,14 @@ private extension HomeViewController {
         showsTableView.register(UINib.init(nibName: "TvShowTableViewCell", bundle: nil), forCellReuseIdentifier: "TvShowTableViewCell")
     }
     
+    @objc func refresh(_ sender: UIRefreshControl) {
+        // Code to refresh table view
+        currentPage = 1
+        shows = []
+        getShowsResponse()
+        sender.endRefreshing()
+        showsTableView.reloadData()
+    }
 }
 
 // MARK: - Navigation

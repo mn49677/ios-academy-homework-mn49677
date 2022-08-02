@@ -263,10 +263,7 @@ private extension LoginViewController {
         do {
             let authInfo = try AuthInfo(headers: headers)
             KeychainAccess.setAuthInfo(authInfo: authInfo)
-            print("!!!!!!!Keychain: \(KeychainAccess.getAuthInfo()?.headers)")
-        } catch {
-            print("Error while saving...")
-        }
+        } catch {}
     }
     
     func rememberCredentials(username: String, password: String) {
