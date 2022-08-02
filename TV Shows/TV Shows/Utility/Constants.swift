@@ -30,4 +30,8 @@ enum Constants {
         static var username = "username"
         static var password = "password"
     }
+    
+    enum App {
+        static var bundleIdentifier = "com.infinum-academy-mn49677.TV-Shows"
+    }
 }

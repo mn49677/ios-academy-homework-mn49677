@@ -19,12 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         let navigationController = UINavigationController()
-        do{
-            let _: AuthInfo? =  try UserDefaults.standard.getObject(forKey: Constants.Keys.authInfo, castTo: AuthInfo.self)// AuthInfo fetched from user defaults
+        let authInfo: AuthInfo? =  KeychainAccess.getAuthInfo()
+        if authInfo != nil {
             let storyboard = UIStoryboard(name: "Home", bundle: nil)
             let homeViewController = storyboard.instantiateViewController(withIdentifier: Constants.ViewControllers.home) as! HomeViewController
             navigationController.viewControllers = [homeViewController]
-        } catch {
+        } else {
             let storyboard = UIStoryboard(name: "Home", bundle: nil)
             let loginViewController = storyboard.instantiateViewController(withIdentifier: Constants.ViewControllers.login) as! LoginViewController
             navigationController.viewControllers = [loginViewController]

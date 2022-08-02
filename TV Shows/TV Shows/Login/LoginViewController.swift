@@ -70,7 +70,6 @@ final class LoginViewController : UIViewController {
         super.viewDidLoad()
         setupUI()
         animateLogo()
-        tryLoginAndRedirectWithSavedCredentials()
         
         #if DEBUG
         emailTextField.text = "john@doe.com"
@@ -263,20 +262,15 @@ private extension LoginViewController {
         guard let headers = headers else  { return }
         do {
             let authInfo = try AuthInfo(headers: headers)
-            try UserDefaults.standard.setObject(authInfo, forKey: Constants.Keys.authInfo)
-        } catch {}
+            KeychainAccess.setAuthInfo(authInfo: authInfo)
+            print("!!!!!!!Keychain: \(KeychainAccess.getAuthInfo()?.headers)")
+        } catch {
+            print("Error while saving...")
+        }
     }
     
     func rememberCredentials(username: String, password: String) {
-        UserDefaults.standard.set(username, forKey: Constants.Keys.username)
-        UserDefaults.standard.set(password, forKey: Constants.Keys.password)
-    }
-    
-    func tryLoginAndRedirectWithSavedCredentials() {
-        let email = UserDefaults.standard.string(forKey: Constants.Keys.username)
-        let password = UserDefaults.standard.string(forKey: Constants.Keys.password)
-        guard let email = email, let password = password else  { return }
-        loginUserWith(email: email, password: password, redirectToHome: false)
-        
+        KeychainAccess.setUsername(username: username)
+        KeychainAccess.setPassword(password: password)
     }
 }

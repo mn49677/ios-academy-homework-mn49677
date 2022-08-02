@@ -63,7 +63,7 @@ private extension HomeViewController {
     func resolveAuthInfo() {
         if authInfo == nil {
             do {
-                authInfo = try UserDefaults.standard.getObject(forKey: Constants.Keys.authInfo, castTo: AuthInfo.self)
+                authInfo = KeychainAccess.getAuthInfo()
             } catch {}
         }
     }
