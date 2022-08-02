@@ -22,6 +22,7 @@ final class HomeViewController: UIViewController {
     private var shows: [Show] = []
     private var currentPage = 1
     private let numberOfCellsPerPage = 20
+    private var notificationToken: NSObjectProtocol?
     
     // MARK: - Lifecycle methods
 
@@ -30,6 +31,8 @@ final class HomeViewController: UIViewController {
         resolveAuthInfo()
         getShowsResponse()
         setupTableView()
+        setupRightBarButton()
+        setupObserver()
     }
 }
 
@@ -104,7 +107,7 @@ extension HomeViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - Setup table view
+// MARK: - Setup view and observer
 
 private extension HomeViewController {
         
@@ -130,6 +133,40 @@ private extension HomeViewController {
         getShowsResponse()
         sender.endRefreshing()
         showsTableView.reloadData()
+    }
+    
+    func setupRightBarButton() {
+        let profileDetailsItem = UIBarButtonItem(
+            image: UIImage(named: "ic-profile"),
+            style: .plain,
+            target: self,
+            action: #selector(profileDetailsActionHandler)
+                )
+        profileDetailsItem.tintColor = UIColor.blue
+        navigationItem.rightBarButtonItem = profileDetailsItem
+    }
+    
+    @objc private func profileDetailsActionHandler() {
+        // open profile view
+        let profileViewController = storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.profile) as! ProfileViewController
+        profileViewController.configure(authInfo: authInfo)
+        let navigationController = UINavigationController(rootViewController: profileViewController)
+        present(navigationController, animated: true)
+    }
+    
+    func setupObserver() {
+        notificationToken = NotificationCenter
+            .default
+            .addObserver(
+                forName: Constants.Notifications.logout,
+                object: nil,
+                queue: nil,
+                using: { [weak self] notification in
+                    guard let self = self else { return }
+                    let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.login) as! LoginViewController
+                    self.navigationController?.setViewControllers([loginViewController], animated: true)
+                }
+            )
     }
 }
 

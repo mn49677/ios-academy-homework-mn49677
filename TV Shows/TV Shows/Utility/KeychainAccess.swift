@@ -43,4 +43,13 @@ class KeychainAccess {
         return data
     }
     
+    static func removeAll() {
+        do {
+            try keychain.remove(Constants.Keys.authInfo)
+            try keychain.remove(Constants.Keys.username)
+            try keychain.remove(Constants.Keys.password)
+        } catch {
+            print(error)
+        }
+    }
 }
