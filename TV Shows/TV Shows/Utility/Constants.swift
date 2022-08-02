@@ -24,4 +24,10 @@ enum Constants {
         static var visibilityIcon = "visibility-icon.png"
         static var nonVisibileIcon = "visibility-2-icon.png"
     }
+    
+    enum Keys {
+        static var authInfo = "authInfo"
+        static var username = "username"
+        static var password = "password"
+    }
 }

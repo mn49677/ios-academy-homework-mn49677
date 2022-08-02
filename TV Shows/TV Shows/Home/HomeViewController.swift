@@ -27,6 +27,7 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        resolveAuthInfo()
         getShowsResponse()
         setupTableView()
     }
@@ -57,6 +58,14 @@ private extension HomeViewController {
                   self.onError()
               }
           }
+    }
+    
+    func resolveAuthInfo() {
+        if authInfo == nil {
+            do {
+                authInfo = try UserDefaults.standard.getObject(forKey: Constants.Keys.authInfo, castTo: AuthInfo.self)
+            } catch {}
+        }
     }
 }
 

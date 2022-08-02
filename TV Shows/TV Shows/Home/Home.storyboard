@@ -172,6 +172,7 @@
                         <outlet property="logoImage" destination="C4H-7w-y9Z" id="jsH-CA-wSv"/>
                         <outlet property="passwordTextField" destination="1dr-Db-2F8" id="MdP-bR-oGr"/>
                         <outlet property="registerButton" destination="dem-3i-nHY" id="Wo4-5k-gMk"/>
+                        <outlet property="rememberMeButton" destination="atQ-lD-68v" id="Rs9-wJ-PFq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hxn-Na-GJG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

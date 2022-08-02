@@ -24,6 +24,7 @@ final class LoginViewController : UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var logoImage: UIImageView!
+    @IBOutlet weak var rememberMeButton: UIButton!
     
     // MARK: - Actions
     
@@ -32,7 +33,7 @@ final class LoginViewController : UIViewController {
         let password = passwordTextField.text
         
         guard let email = email, let password = password else { return }
-        loginUserWith(email: email, password: password)
+        loginUserWith(email: email, password: password, redirectToHome: true)
     }
     
     @IBAction func registerButtonTapped() {
@@ -69,6 +70,8 @@ final class LoginViewController : UIViewController {
         super.viewDidLoad()
         setupUI()
         animateLogo()
+        tryLoginAndRedirectWithSavedCredentials()
+        
         #if DEBUG
         emailTextField.text = "john@doe.com"
         passwordTextField.text = "test1234"
@@ -128,9 +131,10 @@ private extension LoginViewController {
             .responseDecodable(of: UserResponse.self) { [weak self] dataResponse in
                 guard let self = self else { return }
                 MBProgressHUD.hide(for: self.view, animated: true)
+                self.headers = dataResponse.response?.headers.dictionary
                 switch dataResponse.result {
                 case .success(let userResponse):
-                    self.responseToSuccess(userResponse: userResponse)
+                    self.responseToSuccess(userResponse: userResponse, redirectToHome: true)
                 case .failure(let error):
                     self.responseToError(error: error, button: self.registerButton)
                 }
@@ -142,7 +146,7 @@ private extension LoginViewController {
     
     // MARK: - Login
     
-    func loginUserWith(email: String, password: String) {
+    func loginUserWith(email: String, password: String, redirectToHome: Bool) {
         MBProgressHUD.showAdded(to: view, animated: true)
 
         let parameters: [String: String] = [
@@ -164,7 +168,7 @@ private extension LoginViewController {
                 self.headers = dataResponse.response?.headers.dictionary
                 switch dataResponse.result {
                 case .success(let userResponse):
-                    self.responseToSuccess(userResponse: userResponse)
+                    self.responseToSuccess(userResponse: userResponse, redirectToHome: redirectToHome)
                 case .failure(let error):
                     self.responseToError(error: error, button: self.loginButton)
                 }
@@ -177,9 +181,16 @@ private extension LoginViewController {
 
 private extension LoginViewController {
         
-    func responseToSuccess(userResponse: UserResponse){
+    func responseToSuccess(userResponse: UserResponse, redirectToHome: Bool){
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
         self.userResponse = userResponse
-        pushHomeViewController()
+        if rememberMeButton.isSelected {
+            rememberAuthInfo()
+            rememberCredentials(username: email, password: password)
+        }
+        if redirectToHome {
+            pushHomeViewController()
+        }
     }
         
     func responseToError(error: AFError, button: UIButton){
@@ -242,5 +253,30 @@ private extension LoginViewController {
             } completion: { _ in
                 self.logoImage.transform = .identity
             }
+    }
+}
+
+
+private extension LoginViewController {
+    
+    func rememberAuthInfo() {
+        guard let headers = headers else  { return }
+        do {
+            let authInfo = try AuthInfo(headers: headers)
+            try UserDefaults.standard.setObject(authInfo, forKey: Constants.Keys.authInfo)
+        } catch {}
+    }
+    
+    func rememberCredentials(username: String, password: String) {
+        UserDefaults.standard.set(username, forKey: Constants.Keys.username)
+        UserDefaults.standard.set(password, forKey: Constants.Keys.password)
+    }
+    
+    func tryLoginAndRedirectWithSavedCredentials() {
+        let email = UserDefaults.standard.string(forKey: Constants.Keys.username)
+        let password = UserDefaults.standard.string(forKey: Constants.Keys.password)
+        guard let email = email, let password = password else  { return }
+        loginUserWith(email: email, password: password, redirectToHome: false)
+        
     }
 }
