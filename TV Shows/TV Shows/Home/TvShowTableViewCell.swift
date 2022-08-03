@@ -20,12 +20,8 @@ extension TvShowTableViewCell {
     
     func configure(with item: Show) {
         titleLabel.text = item.title
-        
-        let unwrappedUrl = item.imageURL != nil
-        ? URL(string: item.imageURL!)
-        : nil
         showImage.kf.setImage(
-            with: unwrappedUrl,
+            with: item.imageURL,
             placeholder: UIImage(named: "ic-show-placeholder-vertical"),
             options: [.cacheOriginalImage])
     }

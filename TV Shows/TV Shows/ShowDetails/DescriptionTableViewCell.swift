@@ -16,7 +16,7 @@ final class DescriptionTableViewCell: UITableViewCell {
     @IBOutlet private weak var reviewSummaryLabel: UILabel!
     @IBOutlet private weak var showImage: UIImageView!
     
-    public func configure(description: String, numberOfReviews: Int, averageRating: Float, showImageUrl: String?) {
+    public func configure(description: String, numberOfReviews: Int, averageRating: Float, showImageUrl: URL?) {
         descriptionLabel.text = description
         if numberOfReviews == 0 {
             reviewSummaryLabel.text = "No reviews yet."
@@ -25,11 +25,8 @@ final class DescriptionTableViewCell: UITableViewCell {
             reviewSummaryLabel.textAlignment = .left
         }
         selectionStyle = .none
-        let unwrappedUrl = showImageUrl != nil
-        ? URL(string: showImageUrl!)
-        : nil
         showImage.kf.setImage(
-            with: unwrappedUrl,
+            with: showImageUrl,
             placeholder: UIImage(named: "ic-show-placeholder-rectangle"),
             options: [.cacheOriginalImage])
     }

@@ -36,7 +36,7 @@ final class HomeViewController: UIViewController {
     }
 }
 
-// MARK: - API communication
+// MARK: - API communication methods
 
 private extension HomeViewController {
     
@@ -70,7 +70,7 @@ private extension HomeViewController {
     }
 }
 
-// MARK: - UITableView data loading delegate
+// MARK: - UITableView data loading delegate methods
 
 extension HomeViewController : UITableViewDataSource {
         
@@ -88,7 +88,7 @@ extension HomeViewController : UITableViewDataSource {
     }
 }
 
-// MARK: - UITableViewDelegate for selecting and pagination
+// MARK: - UITableViewDelegate for selecting and pagination methods
 
 extension HomeViewController: UITableViewDelegate {
         
@@ -107,7 +107,7 @@ extension HomeViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - Setup view and observer
+// MARK: - Setup view and observer methods
 
 private extension HomeViewController {
         
@@ -141,7 +141,7 @@ private extension HomeViewController {
             style: .plain,
             target: self,
             action: #selector(profileDetailsActionHandler)
-                )
+        )
         profileDetailsItem.tintColor = UIColor.blue
         navigationItem.rightBarButtonItem = profileDetailsItem
     }
@@ -170,7 +170,7 @@ private extension HomeViewController {
     }
 }
 
-// MARK: - Navigation
+// MARK: - Navigation methods
 
 extension HomeViewController {
             
@@ -187,7 +187,7 @@ extension HomeViewController {
     }
 }
 
-// MARK: - API Response handlers
+// MARK: - API Response handler methods
 
 private extension HomeViewController {
     

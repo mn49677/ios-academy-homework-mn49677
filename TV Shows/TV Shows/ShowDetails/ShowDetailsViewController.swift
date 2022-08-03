@@ -41,7 +41,7 @@ final class ShowDetailsViewController: UIViewController {
     }
 }
 
-// MARK: - UITableView data loading delegate
+// MARK: - UITableView data loading delegate method
 
 extension ShowDetailsViewController : UITableViewDataSource {
     

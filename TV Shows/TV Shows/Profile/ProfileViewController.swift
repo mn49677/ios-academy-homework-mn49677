@@ -11,15 +11,22 @@ import Alamofire
 
 class ProfileViewController: UIViewController {
     
+    // MARK: - Outlets
+
+    @IBOutlet weak var profilePhotoImage: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    
     // MARK: - Properties
     
     private var authInfo: AuthInfo?
     private var userInfo: User?
     
-    // MARK: - Outlets
-
-    @IBOutlet weak var profilePhotoImage: UIImageView!
-    @IBOutlet weak var usernameLabel: UILabel!
+    // MARK: - Lifecycle methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getProfileInfo()
+    }
     
     // MARK: - Actions
     
@@ -29,21 +36,14 @@ class ProfileViewController: UIViewController {
             let nc = NotificationCenter.default
             nc.post(name: Constants.Notifications.logout, object: nil)
         }
-        
     }
     
     @IBAction func changePofilePhotoClicked(_ sender: Any) {
         present(getImagePickerController(), animated: true)
     }
-    
-    // MARK: - Lifecycle methods
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        getProfileInfo()
-    }
-
 }
+
+// MARK: - Utility methods
 
 extension ProfileViewController {
     
@@ -55,17 +55,14 @@ extension ProfileViewController {
     
     private func setupUserData() {
         guard let userInfo = userInfo else  { return }
-        let imageUrl = userInfo.imageUrl != nil
-        ? URL(string: userInfo.imageUrl!)
-        : nil
+        let url = userInfo.imageUrl.flatMap { URL(string: $0) }
         usernameLabel.text = userInfo.email
         profilePhotoImage.kf.setImage(
-            with: imageUrl,
+            with: url,
             placeholder: UIImage(named: "ic-profile-placeholder"))
     }
     
     @objc func close() {
-        navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
     
@@ -75,38 +72,9 @@ extension ProfileViewController {
         imagePicker.delegate = self
         return imagePicker
     }
-    
-    
-   func storeImage(_ image: UIImage) {
-       guard let imageData = image.jpegData(compressionQuality: 0.9) else { return }
-       guard let headers = authInfo?.headers else { return }
-
-       let requestData = MultipartFormData()
-       requestData.append(
-           imageData,
-           withName: "image",
-           fileName: "image.jpg",
-           mimeType: "image/jpg")
-       AF
-       .upload(
-           multipartFormData: requestData,
-           to: "https://tv-shows.infinum.academy/users",
-           method: .put,
-           headers: HTTPHeaders(headers)
-       )
-       .validate()
-       .responseDecodable(of: UserResponse.self) { [weak self] dataResponse in
-           guard let self = self else  { return }
-           switch dataResponse.result {
-           case .success(let userResponse):
-               self.userInfo = userResponse.user
-               self.setupUserData()
-           case .failure(let error):
-               print(error)
-           }
-       }
-   }
 }
+
+// MARK: - API methods
 
 extension ProfileViewController {
     
@@ -129,7 +97,39 @@ extension ProfileViewController {
               }
           }
     }
+    
+    func storeImage(_ image: UIImage) {
+        guard let imageData = image.jpegData(compressionQuality: 0.9) else { return }
+        guard let headers = authInfo?.headers else { return }
+
+        let requestData = MultipartFormData()
+        requestData.append(
+            imageData,
+            withName: "image",
+            fileName: "image.jpg",
+            mimeType: "image/jpg")
+        AF
+        .upload(
+            multipartFormData: requestData,
+            to: "https://tv-shows.infinum.academy/users",
+            method: .put,
+            headers: HTTPHeaders(headers)
+        )
+        .validate()
+        .responseDecodable(of: UserResponse.self) { [weak self] dataResponse in
+            guard let self = self else  { return }
+            switch dataResponse.result {
+            case .success(let userResponse):
+                self.userInfo = userResponse.user
+                self.setupUserData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
+
+// MARK: - Configuration methods
 
 extension ProfileViewController {
     
@@ -137,6 +137,8 @@ extension ProfileViewController {
         self.authInfo = authInfo
     }
 }
+
+// MARK: - Image picker delegate methods
 
 extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

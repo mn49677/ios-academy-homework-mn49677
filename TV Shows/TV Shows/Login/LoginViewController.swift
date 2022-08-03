@@ -10,12 +10,6 @@ import MBProgressHUD
 import Alamofire
 
 final class LoginViewController : UIViewController {
-    
-    // MARK: - Properties
-    
-    private var userResponse: UserResponse?
-    private var headers: [String: String]?
-    private var visibilityButton: UIButton?
 
     // MARK: - Outlets
     
@@ -25,6 +19,25 @@ final class LoginViewController : UIViewController {
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var rememberMeButton: UIButton!
+    
+    // MARK: - Properties
+    
+    private var userResponse: UserResponse?
+    private var headers: [String: String]?
+    private var visibilityButton: UIButton?
+    
+    // MARK: - Lifecycle methods
+    
+    override public func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+        animateLogo()
+        
+        #if DEBUG
+        emailTextField.text = "john@doe.com"
+        passwordTextField.text = "test1234"
+        #endif
+    }
     
     // MARK: - Actions
     
@@ -64,19 +77,6 @@ final class LoginViewController : UIViewController {
         updateButtonState()
     }
     
-    // MARK: - Lifecycle methods
-    
-    override public func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-        animateLogo()
-        
-        #if DEBUG
-        emailTextField.text = "john@doe.com"
-        passwordTextField.text = "test1234"
-        #endif
-    }
-    
     // MARK: - Methods
     
     private func setupUI() {
@@ -106,9 +106,9 @@ final class LoginViewController : UIViewController {
     }
 }
 
+// MARK: - API methods
+
 private extension LoginViewController {
-    
-    // MARK: - Registration
     
     func registerUserWith(email: String, password: String) {
         // start
@@ -142,9 +142,7 @@ private extension LoginViewController {
 }
 
 private extension LoginViewController {
-    
-    // MARK: - Login
-    
+
     func loginUserWith(email: String, password: String, redirectToHome: Bool) {
         MBProgressHUD.showAdded(to: view, animated: true)
 
@@ -176,16 +174,14 @@ private extension LoginViewController {
     }
 }
 
-// MARK: - API handling
+// MARK: - API handling methods
 
 private extension LoginViewController {
         
     func responseToSuccess(userResponse: UserResponse, redirectToHome: Bool){
-        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
         self.userResponse = userResponse
         if rememberMeButton.isSelected {
             rememberAuthInfo()
-            rememberCredentials(username: email, password: password)
         }
         if redirectToHome {
             pushHomeViewController()
@@ -197,7 +193,7 @@ private extension LoginViewController {
     }
 }
 
-// MARK: - Push home view controller
+// MARK: - Utility methods
 
 private extension LoginViewController {
     
@@ -205,7 +201,7 @@ private extension LoginViewController {
         guard let headers = headers else { return }
         let homeController = storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.home) as! HomeViewController
         var authInfo: AuthInfo?
-        do{
+        do {
             authInfo = try AuthInfo(headers: headers)
         } catch {
             authInfo = nil
@@ -213,11 +209,6 @@ private extension LoginViewController {
         homeController.configure(authInfo: authInfo, userResponse: userResponse)
         navigationController?.setViewControllers([homeController], animated: true)
     }
-}
-
-// MARK: - Other internal methods
-
-private extension LoginViewController {
     
     private func updateButtonState() -> Void {
         
@@ -232,10 +223,8 @@ private extension LoginViewController {
             registerButton.alpha = 0.5
         }
     }
-}
-
-private extension LoginViewController {
-    func animateLogo() {
+    
+    private func animateLogo() {
         let newTransform = CGAffineTransform(
             scaleX: 0.8, // 2 times the width
             y: 0.8
@@ -256,21 +245,12 @@ private extension LoginViewController {
                 self.logoImage.transform = .identity
             }
     }
-}
-
-
-private extension LoginViewController {
     
-    func rememberAuthInfo() {
+    private func rememberAuthInfo() {
         guard let headers = headers else  { return }
         do {
             let authInfo = try AuthInfo(headers: headers)
             KeychainAccess.setAuthInfo(authInfo: authInfo)
         } catch {}
-    }
-    
-    func rememberCredentials(username: String, password: String) {
-        KeychainAccess.setUsername(username: username)
-        KeychainAccess.setPassword(password: password)
     }
 }
