@@ -151,7 +151,7 @@ private extension RatingView {
     func ratingButtonActionHandler(_ button: UIButton) {
         guard let buttonIndex = ratingButtons.firstIndex(of: button)  else { return }
         // TODO: Enter the correct index for the rating
-        setRating(buttonIndex)
+        setRating(buttonIndex + 1)
         delegate?.didChangeRating(rating)
     }
 }
