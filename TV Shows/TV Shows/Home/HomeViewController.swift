@@ -17,22 +17,26 @@ final class HomeViewController: UIViewController {
     
     // MARK: - Properties
     
-    var userResponse: UserResponse?
-    var authInfo: AuthInfo?
+    private var userResponse: UserResponse?
+    private var authInfo: AuthInfo?
     private var shows: [Show] = []
     private var currentPage = 1
     private let numberOfCellsPerPage = 20
+    private var notificationToken: NSObjectProtocol?
     
     // MARK: - Lifecycle methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        resolveAuthInfo()
         getShowsResponse()
         setupTableView()
+        setupRightBarButton()
+        setupObserver()
     }
 }
 
-// MARK: - API communication
+// MARK: - API communication methods
 
 private extension HomeViewController {
     
@@ -58,9 +62,15 @@ private extension HomeViewController {
               }
           }
     }
+    
+    func resolveAuthInfo() {
+        if authInfo == nil {
+            authInfo = KeychainAccess.getAuthInfo()
+        }
+    }
 }
 
-// MARK: - UITableView data loading delegate
+// MARK: - UITableView data loading delegate methods
 
 extension HomeViewController : UITableViewDataSource {
         
@@ -78,7 +88,7 @@ extension HomeViewController : UITableViewDataSource {
     }
 }
 
-// MARK: - UITableViewDelegate for selecting and pagination
+// MARK: - UITableViewDelegate for selecting and pagination methods
 
 extension HomeViewController: UITableViewDelegate {
         
@@ -97,14 +107,18 @@ extension HomeViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - Setup table view
+// MARK: - Setup view and observer methods
 
 private extension HomeViewController {
         
     func setupTableView() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        
         showsTableView.estimatedRowHeight = 110
         showsTableView.rowHeight = UITableView.automaticDimension
         showsTableView.tableFooterView = UIView()
+        showsTableView.addSubview(refreshControl)
         
         showsTableView.delegate = self
         showsTableView.dataSource = self
@@ -112,22 +126,68 @@ private extension HomeViewController {
         showsTableView.register(UINib.init(nibName: "TvShowTableViewCell", bundle: nil), forCellReuseIdentifier: "TvShowTableViewCell")
     }
     
+    @objc func refresh(_ sender: UIRefreshControl) {
+        // Code to refresh table view
+        currentPage = 1
+        shows = []
+        getShowsResponse()
+        sender.endRefreshing()
+        showsTableView.reloadData()
+    }
+    
+    func setupRightBarButton() {
+        let profileDetailsItem = UIBarButtonItem(
+            image: UIImage(named: "ic-profile"),
+            style: .plain,
+            target: self,
+            action: #selector(profileDetailsActionHandler)
+        )
+        profileDetailsItem.tintColor = UIColor.blue
+        navigationItem.rightBarButtonItem = profileDetailsItem
+    }
+    
+    @objc private func profileDetailsActionHandler() {
+        // open profile view
+        let profileViewController = storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.profile) as! ProfileViewController
+        profileViewController.configure(authInfo: authInfo)
+        let navigationController = UINavigationController(rootViewController: profileViewController)
+        present(navigationController, animated: true)
+    }
+    
+    func setupObserver() {
+        notificationToken = NotificationCenter
+            .default
+            .addObserver(
+                forName: Constants.Notifications.logout,
+                object: nil,
+                queue: nil,
+                using: { [weak self] notification in
+                    guard let self = self else { return }
+                    let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.login) as! LoginViewController
+                    self.navigationController?.setViewControllers([loginViewController], animated: true)
+                }
+            )
+    }
 }
 
-// MARK: - Navigation
+// MARK: - Navigation methods
 
-private extension HomeViewController {
+extension HomeViewController {
             
     func pushShowDetailsViewController(withShowAt indexRow: Int) {
         let detailsController =
             storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.details) as! ShowDetailsViewController
-        detailsController.authInfo = authInfo
-        detailsController.show = shows[indexRow]
+        detailsController.configure(authInfo: authInfo, show: shows[indexRow])
         navigationController?.pushViewController(detailsController, animated: true)
+    }
+    
+    public func configure(authInfo: AuthInfo?, userResponse: UserResponse?) {
+        self.authInfo = authInfo
+        self.userResponse = userResponse
     }
 }
 
-// MARK: - API Response handlers
+// MARK: - API Response handler methods
 
 private extension HomeViewController {
     

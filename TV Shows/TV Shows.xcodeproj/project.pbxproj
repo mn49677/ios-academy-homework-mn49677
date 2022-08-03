@@ -11,6 +11,7 @@
 		AD2F646C28914707002AB305 /* ShowDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2F646B28914707002AB305 /* ShowDetailsViewController.swift */; };
 		AD2F6471289173F2002AB305 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2F646F289173F2002AB305 /* DescriptionTableViewCell.swift */; };
 		AD2F6472289173F2002AB305 /* DescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD2F6470289173F2002AB305 /* DescriptionTableViewCell.xib */; };
+		AD32442F2898413100EEA5F8 /* ExtensionsUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32442E2898413100EEA5F8 /* ExtensionsUIButton.swift */; };
 		AD4319DB28874BDF00124AD1 /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4319DA28874BDF00124AD1 /* UnderlinedTextField.swift */; };
 		AD4319E128876D1500124AD1 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD4319E028876D1500124AD1 /* Home.storyboard */; };
 		AD4319E328876D2C00124AD1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4319E228876D2C00124AD1 /* HomeViewController.swift */; };
@@ -25,6 +26,9 @@
 		AD761E8828908DD0001811D6 /* TvShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD761E8628908DD0001811D6 /* TvShowTableViewCell.xib */; };
 		AD86D275287C70EF0049FD11 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD86D274287C70EF0049FD11 /* Login.storyboard */; };
 		AD86D277287C710B0049FD11 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD86D276287C710B0049FD11 /* LoginViewController.swift */; };
+		ADAF50CB28992DE7005D151B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAF50CA28992DE7005D151B /* UserDefaults.swift */; };
+		ADAF50CF28994E4E005D151B /* KeychainAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAF50CE28994E4E005D151B /* KeychainAccess.swift */; };
+		ADAF50D228995F72005D151B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAF50D128995F72005D151B /* ProfileViewController.swift */; };
 		ADC6845C2891B45F00661E5D /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC6845A2891B45F00661E5D /* ReviewTableViewCell.swift */; };
 		ADC6845D2891B45F00661E5D /* ReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC6845B2891B45F00661E5D /* ReviewTableViewCell.xib */; };
 		ADC684602891B98300661E5D /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC6845F2891B98300661E5D /* Review.swift */; };
@@ -37,6 +41,7 @@
 		AD2F646B28914707002AB305 /* ShowDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsViewController.swift; sourceTree = "<group>"; };
 		AD2F646F289173F2002AB305 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		AD2F6470289173F2002AB305 /* DescriptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionTableViewCell.xib; sourceTree = "<group>"; };
+		AD32442E2898413100EEA5F8 /* ExtensionsUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsUIButton.swift; sourceTree = "<group>"; };
 		AD4319DA28874BDF00124AD1 /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		AD4319E028876D1500124AD1 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		AD4319E228876D2C00124AD1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +58,9 @@
 		AD761E8628908DD0001811D6 /* TvShowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TvShowTableViewCell.xib; sourceTree = "<group>"; };
 		AD86D274287C70EF0049FD11 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		AD86D276287C710B0049FD11 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		ADAF50CA28992DE7005D151B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		ADAF50CE28994E4E005D151B /* KeychainAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccess.swift; sourceTree = "<group>"; };
+		ADAF50D128995F72005D151B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		ADC6845A2891B45F00661E5D /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		ADC6845B2891B45F00661E5D /* ReviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewTableViewCell.xib; sourceTree = "<group>"; };
 		ADC6845F2891B98300661E5D /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
@@ -106,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				AD4319DA28874BDF00124AD1 /* UnderlinedTextField.swift */,
+				AD32442E2898413100EEA5F8 /* ExtensionsUIButton.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -144,6 +153,7 @@
 		AD538CCE2875F49500C7FCDA /* TV Shows */ = {
 			isa = PBXGroup;
 			children = (
+				ADAF50D028995F55005D151B /* Profile */,
 				AD86D273287C70AF0049FD11 /* Login */,
 				AD4319DF28876CD000124AD1 /* Home */,
 				AD2F646A289146C0002AB305 /* ShowDetails */,
@@ -162,6 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				AD4319E62888748D00124AD1 /* Constants.swift */,
+				ADAF50CA28992DE7005D151B /* UserDefaults.swift */,
+				ADAF50CE28994E4E005D151B /* KeychainAccess.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -174,6 +186,14 @@
 				AD86D276287C710B0049FD11 /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		ADAF50D028995F55005D151B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				ADAF50D128995F72005D151B /* ProfileViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		ADC6845E2891B96400661E5D /* Reviews */ = {
@@ -315,10 +335,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD761E8728908DD0001811D6 /* TvShowTableViewCell.swift in Sources */,
+				ADAF50D228995F72005D151B /* ProfileViewController.swift in Sources */,
 				AD4319DB28874BDF00124AD1 /* UnderlinedTextField.swift in Sources */,
 				AD86D277287C710B0049FD11 /* LoginViewController.swift in Sources */,
+				ADAF50CF28994E4E005D151B /* KeychainAccess.swift in Sources */,
 				AD2F6471289173F2002AB305 /* DescriptionTableViewCell.swift in Sources */,
 				ADC684632891C6BF00661E5D /* WriteReviewViewController.swift in Sources */,
+				ADAF50CB28992DE7005D151B /* UserDefaults.swift in Sources */,
 				AD538CD02875F49500C7FCDA /* AppDelegate.swift in Sources */,
 				AD538CD22875F49500C7FCDA /* SceneDelegate.swift in Sources */,
 				AD4319ED2888888B00124AD1 /* User.swift in Sources */,
@@ -327,6 +350,7 @@
 				ADC684652891D63D00661E5D /* RatingView.swift in Sources */,
 				ADC6845C2891B45F00661E5D /* ReviewTableViewCell.swift in Sources */,
 				AD4319E72888748D00124AD1 /* Constants.swift in Sources */,
+				AD32442F2898413100EEA5F8 /* ExtensionsUIButton.swift in Sources */,
 				AD761E81289074DA001811D6 /* ShowList.swift in Sources */,
 				AD4319E328876D2C00124AD1 /* HomeViewController.swift in Sources */,
 			);

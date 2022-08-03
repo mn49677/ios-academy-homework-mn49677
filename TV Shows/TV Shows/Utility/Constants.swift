@@ -13,6 +13,7 @@ enum Constants {
         static var home = "HomeViewController"
         static var details = "ShowDetailsViewController"
         static var review = "WriteReviewViewController"
+        static var profile = "ProfileViewController"
     }
     
     enum Storyboards {
@@ -23,5 +24,19 @@ enum Constants {
     enum Assets {
         static var visibilityIcon = "visibility-icon.png"
         static var nonVisibileIcon = "visibility-2-icon.png"
+    }
+    
+    enum Keys {
+        static var authInfo = "authInfo"
+        static var username = "username"
+        static var password = "password"
+    }
+    
+    enum App {
+        static var bundleIdentifier = "com.infinum-academy-mn49677.TV-Shows"
+    }
+    
+    enum Notifications {
+        static var logout = NSNotification.Name("didLogout")
     }
 }

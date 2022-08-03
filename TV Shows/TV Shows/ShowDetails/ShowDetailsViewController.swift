@@ -13,9 +13,9 @@ final class ShowDetailsViewController: UIViewController {
     
     // MARK: - Properties
     
-    var authInfo: AuthInfo?
-    var show: Show?
-    var reviewResponse: ReviewResponse?
+    private var authInfo: AuthInfo?
+    private var show: Show?
+    private var reviewResponse: ReviewResponse?
     
     // MARK: - Outlets
     
@@ -26,8 +26,7 @@ final class ShowDetailsViewController: UIViewController {
     @IBAction func writeReviewButtonClicked(_ sender: UIButton) {
         guard let id = show?.id else { return }
         let reviewController = storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.review) as! WriteReviewViewController
-        reviewController.showId = Int(id)
-        reviewController.authInfo = authInfo
+        reviewController.configure(authInfo: authInfo, showId: Int(id))
         let navigationController = UINavigationController(rootViewController: reviewController)
         present(navigationController, animated: true)
     }
@@ -42,7 +41,7 @@ final class ShowDetailsViewController: UIViewController {
     }
 }
 
-// MARK: - UITableView data loading delegate
+// MARK: - UITableView data loading delegate method
 
 extension ShowDetailsViewController : UITableViewDataSource {
     
@@ -61,7 +60,8 @@ extension ShowDetailsViewController : UITableViewDataSource {
             cell.configure(
                 description: show.showDescription,
                 numberOfReviews: show.noOfReviews,
-                averageRating: show.averageRating)
+                averageRating: show.averageRating,
+                showImageUrl: show.imageURL)
             return cell
         } else {
             guard let reviewResponse = reviewResponse else { return ReviewTableViewCell() }
@@ -69,7 +69,7 @@ extension ShowDetailsViewController : UITableViewDataSource {
                 withIdentifier: String(describing: ReviewTableViewCell.self),
                 for: indexPath
             ) as! ReviewTableViewCell
-            let review = reviewResponse.reviews[indexPath.row]
+            let review = reviewResponse.reviews[indexPath.row - 1]
             cell.configure(email: review.user.email, rating: review.rating, comment: review.comment ?? "")
             return cell
         }
@@ -129,5 +129,10 @@ private extension ShowDetailsViewController {
         let alert = UIAlertController(title: "Failed getting the reviews.", message: "Please try again.", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
         present(alert, animated: true, completion: nil)
+    }
+    
+    public func configure(authInfo: AuthInfo?, show: Show?) {
+        self.authInfo = authInfo
+        self.show = show
     }
 }
