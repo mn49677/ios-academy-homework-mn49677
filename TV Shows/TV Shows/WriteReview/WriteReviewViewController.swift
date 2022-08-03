@@ -64,21 +64,26 @@ extension WriteReviewViewController {
                 MBProgressHUD.hide(for: self.view, animated: true)
                 switch dataResponse.result {
                 case .success(_):
-                    print("Success")
+                    self.onSuccess()
                 case .failure(let error):
-                    print(error.errorDescription)
+                    print(error)
                 }
             }
     }
 }
 
 extension WriteReviewViewController {
+    
     func setupUI() {
         navigationItem.title = "Write a review"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(close))
         ratingView.configure(withStyle: .large)
         ratingView.isEnabled = true
         commentTextView.delegate = self
+    }
+    
+    func onSuccess() {
+        self.dismiss(animated: true)
     }
 }
 

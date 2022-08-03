@@ -70,7 +70,7 @@ extension ShowDetailsViewController : UITableViewDataSource {
                 withIdentifier: String(describing: ReviewTableViewCell.self),
                 for: indexPath
             ) as! ReviewTableViewCell
-            let review = reviewResponse.reviews[indexPath.row]
+            let review = reviewResponse.reviews[indexPath.row - 1]
             cell.configure(email: review.user.email, rating: review.rating, comment: review.comment ?? "")
             return cell
         }
