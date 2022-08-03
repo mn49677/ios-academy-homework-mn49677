@@ -13,8 +13,8 @@ class WriteReviewViewController: UIViewController {
     
     // MARK: - Properties
     
-    var authInfo: AuthInfo?
-    var showId: Int?
+    private var authInfo: AuthInfo?
+    private var showId: Int?
     
     // MARK: - Outlets
     
@@ -84,6 +84,11 @@ extension WriteReviewViewController {
     
     func onSuccess() {
         self.dismiss(animated: true)
+    }
+    
+    func configure(authInfo: AuthInfo?, showId: Int?) {
+        self.authInfo = authInfo
+        self.showId = showId
     }
 }
 

@@ -27,7 +27,6 @@
 		AD86D275287C70EF0049FD11 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD86D274287C70EF0049FD11 /* Login.storyboard */; };
 		AD86D277287C710B0049FD11 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD86D276287C710B0049FD11 /* LoginViewController.swift */; };
 		ADAF50CB28992DE7005D151B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAF50CA28992DE7005D151B /* UserDefaults.swift */; };
-		ADAF50CD2899373D005D151B /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAF50CC2899373D005D151B /* Result.swift */; };
 		ADAF50CF28994E4E005D151B /* KeychainAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAF50CE28994E4E005D151B /* KeychainAccess.swift */; };
 		ADAF50D228995F72005D151B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAF50D128995F72005D151B /* ProfileViewController.swift */; };
 		ADC6845C2891B45F00661E5D /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC6845A2891B45F00661E5D /* ReviewTableViewCell.swift */; };
@@ -60,7 +59,6 @@
 		AD86D274287C70EF0049FD11 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		AD86D276287C710B0049FD11 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ADAF50CA28992DE7005D151B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
-		ADAF50CC2899373D005D151B /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		ADAF50CE28994E4E005D151B /* KeychainAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccess.swift; sourceTree = "<group>"; };
 		ADAF50D128995F72005D151B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		ADC6845A2891B45F00661E5D /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
@@ -175,7 +173,6 @@
 			children = (
 				AD4319E62888748D00124AD1 /* Constants.swift */,
 				ADAF50CA28992DE7005D151B /* UserDefaults.swift */,
-				ADAF50CC2899373D005D151B /* Result.swift */,
 				ADAF50CE28994E4E005D151B /* KeychainAccess.swift */,
 			);
 			path = Utility;
@@ -337,7 +334,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADAF50CD2899373D005D151B /* Result.swift in Sources */,
 				AD761E8728908DD0001811D6 /* TvShowTableViewCell.swift in Sources */,
 				ADAF50D228995F72005D151B /* ProfileViewController.swift in Sources */,
 				AD4319DB28874BDF00124AD1 /* UnderlinedTextField.swift in Sources */,

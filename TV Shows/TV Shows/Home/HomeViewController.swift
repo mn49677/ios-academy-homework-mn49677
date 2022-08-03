@@ -17,8 +17,8 @@ final class HomeViewController: UIViewController {
     
     // MARK: - Properties
     
-    var userResponse: UserResponse?
-    var authInfo: AuthInfo?
+    private var userResponse: UserResponse?
+    private var authInfo: AuthInfo?
     private var shows: [Show] = []
     private var currentPage = 1
     private let numberOfCellsPerPage = 20
@@ -172,14 +172,18 @@ private extension HomeViewController {
 
 // MARK: - Navigation
 
-private extension HomeViewController {
+extension HomeViewController {
             
     func pushShowDetailsViewController(withShowAt indexRow: Int) {
         let detailsController =
             storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.details) as! ShowDetailsViewController
-        detailsController.authInfo = authInfo
-        detailsController.show = shows[indexRow]
+        detailsController.configure(authInfo: authInfo, show: shows[indexRow])
         navigationController?.pushViewController(detailsController, animated: true)
+    }
+    
+    public func configure(authInfo: AuthInfo?, userResponse: UserResponse?) {
+        self.authInfo = authInfo
+        self.userResponse = userResponse
     }
 }
 

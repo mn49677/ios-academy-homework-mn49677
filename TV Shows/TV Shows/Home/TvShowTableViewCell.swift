@@ -11,7 +11,7 @@ import Kingfisher
 final class TvShowTableViewCell: UITableViewCell {
     
     @IBOutlet weak private var titleLabel: UILabel!
-    @IBOutlet weak var showImage: UIImageView!
+    @IBOutlet weak private var showImage: UIImageView!
 }
 
 extension TvShowTableViewCell {

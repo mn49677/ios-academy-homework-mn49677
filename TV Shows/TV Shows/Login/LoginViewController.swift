@@ -204,10 +204,13 @@ private extension LoginViewController {
     func pushHomeViewController() {
         guard let headers = headers else { return }
         let homeController = storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllers.home) as! HomeViewController
-        homeController.userResponse = userResponse
-        do {
-            try homeController.authInfo = AuthInfo(headers: headers)
-        } catch { }
+        var authInfo: AuthInfo?
+        do{
+            authInfo = try AuthInfo(headers: headers)
+        } catch {
+            authInfo = nil
+        }
+        homeController.configure(authInfo: authInfo, userResponse: userResponse)
         navigationController?.setViewControllers([homeController], animated: true)
     }
 }
